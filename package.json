@@ -1,0 +1,31 @@
+{
+  "name": "kerplow",
+  "version": "1.0.0",
+  "description": "Project configuration that self-destructs!",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "start": "node scripts/postinstall.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianjenkins94/kerplow.git"
+  },
+  "author": "Brian Jenkins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brianjenkins94/kerplow/issues"
+  },
+  "homepage": "https://github.com/brianjenkins94/kerplow#readme",
+  "dependencies": {
+    "json5": "^2.1.0",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.2",
+    "cross-env": "^5.2.0",
+    "ts-node": "^8.2.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  }
+}

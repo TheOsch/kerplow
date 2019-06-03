@@ -1,0 +1,10 @@
+{
+	"editor.formatOnSave": true,
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+	"tslint.jsEnable": true,
+	"typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+	"typescript.format.insertSpaceBeforeFunctionParenthesis": false
+}
