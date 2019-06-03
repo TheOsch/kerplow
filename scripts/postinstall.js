@@ -220,9 +220,11 @@ function deleteKeyFromJson5File(key, file) {
 	deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package.json"));
 	deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package-lock.json"));
 
-	execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
+	try {
+		execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
+	} catch {}
 
 	readline.close();
 
-	process.exit(1);
+	process.exitCode = 1;
 })();
