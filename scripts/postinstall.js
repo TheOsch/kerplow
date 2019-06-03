@@ -70,12 +70,14 @@ function deleteKeyFromJson5File(key, file) {
 	let typescript = await confirm("TypeScript? [Y/n] ");
 
 	if (typescript === true) {
-		fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
-
+		dependencies.push("cross-env");
 		dependencies.push("typescript");
 		dependencies.push("ts-node");
 
 		devDependencies.push("tslint");
+		devDependencies.push("@types/node");
+
+		fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
 	}
 
 	let vscode = await confirm("VS Code? [Y/n] ");
