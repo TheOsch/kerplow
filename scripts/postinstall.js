@@ -47,6 +47,20 @@ function addKeyValuePairToJson5File(key, value, file) {
 	fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 }
 
+function deleteKeyFromJson5File(key, file) {
+	let parsedFile = JSON5.parse(fs.readFileSync(file));
+
+	let lastKey = key.pop();
+
+	let parentKey = key.reduce(function(object, key) {
+		return object[key];
+	}, parsedFile);
+
+	delete parentKey[lastKey];
+
+	fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
+}
+
 // tslint:disable-next-line: no-floating-promises
 (async function() {
 	if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
@@ -202,6 +216,9 @@ function addKeyValuePairToJson5File(key, value, file) {
 	execSync("npm install --save-dev " + devDependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });
 
 	console.log("> npm remove kerplow\n");
+
+	deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package.json"));
+	deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package-lock.json"));
 
 	execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
 
