@@ -92,7 +92,7 @@ function sleep(ms) {
 	console.log();
 
 	let typescript = await confirm("TypeScript? [Y/n] ");
-	console.log();
+	console.log("\n");
 
 	if (typescript === true) {
 		dependencies.push("cross-env");
@@ -125,7 +125,7 @@ function sleep(ms) {
 	console.log();
 
 	let vscode = await confirm("VS Code? [Y/n] ");
-	console.log();
+	console.log("\n");
 
 	if (vscode === true) {
 		mkdirpSync(path.join(baseDirectory, ".vscode"));
@@ -157,7 +157,7 @@ function sleep(ms) {
 	console.log();
 
 	let express = await confirm("Express? [Y/n] ");
-	console.log();
+	console.log("\n");
 
 	if (express === true) {
 		dependencies.push("convict");
@@ -206,7 +206,7 @@ function sleep(ms) {
 		console.log();
 
 		let ejs = await confirm("EJS? [Y/n] ");
-		console.log();
+		console.log("\n");
 
 		if (ejs === true) {
 			dependencies.push("ejs");
@@ -258,7 +258,7 @@ function sleep(ms) {
 		console.log();
 
 		let sass = await confirm("Sass? [Y/n] ");
-		console.log();
+		console.log("\n");
 
 		if (sass === true) {
 			addKeyValuePairToJson5File(["scripts", "sassc"], "sass --watch public/css/style.scss:public/css/style.min.css --no-cache --sourcemap=none --style=compressed", path.join(baseDirectory, "package.json"));
@@ -279,7 +279,7 @@ function sleep(ms) {
 		console.log();
 
 		let csscomb = await confirm("CSSComb? [Y/n] ");
-		console.log();
+		console.log("\n");
 
 		if (csscomb === true) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
@@ -311,7 +311,7 @@ function sleep(ms) {
 			console.log();
 
 			let rollup = await confirm("Rollup? [Y/n] ");
-			console.log();
+			console.log("\n");
 
 			if (rollup === true) {
 				devDependencies.push("rollup");
@@ -338,7 +338,7 @@ function sleep(ms) {
 			console.log();
 
 			let typedoc = await confirm("TypeDoc? [Y/n] ");
-			console.log();
+			console.log("\n");
 
 			if (typedoc === true) {
 				dependencies.push("typedoc");
