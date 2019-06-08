@@ -71,7 +71,7 @@ function sleep(ms) {
 (async function() {
 	if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 		execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
-		console.log();
+		console.log("\n");
 	}
 
 	console.log("> TypeScript");
@@ -370,11 +370,11 @@ function sleep(ms) {
 	} catch {}
 
 	console.log("kerplow will now self-destruct.");
-	await sleep(1250);
+	await sleep(1500);
 	console.log("You will see an error message.");
-	await sleep(1250);
+	await sleep(1500);
 	console.log("Please disregard.");
-	await sleep(1250);
+	await sleep(1500);
 
 	console.log();
 	console.log("KERPLOW!");
