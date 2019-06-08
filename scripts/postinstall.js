@@ -61,10 +61,17 @@ function deleteKeyFromJson5File(key, file) {
 	fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 }
 
+function sleep(ms) {
+	return new Promise(function(resolve, reject) {
+		setTimeout(resolve, ms);
+	});
+}
+
 // tslint:disable-next-line: no-floating-promises
 (async function() {
 	if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 		execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
+		console.log();
 	}
 
 	console.log("> TypeScript");
@@ -72,20 +79,20 @@ function deleteKeyFromJson5File(key, file) {
 	console.log(">");
 	console.log(">     TypeScript is a strict syntactical superset of JavaScript that adds");
 	console.log(">     optional static typing to the language.");
-	console.log("> ");
+	console.log(">");
 	console.log("> Pros:");
 	console.log("> =====");
 	console.log(">     - Compile time type checking");
-	console.log(">     - Arguably better tooling");
+	console.log(">     - Great tooling");
 	console.log(">");
 	console.log("> Cons:");
 	console.log("> =====");
 	console.log(">     - People will think you like Microsoft, when you really just like Anders");
 	console.log(">       Hejlsberg");
-	console.log("");
+	console.log();
 
 	let typescript = await confirm("TypeScript? [Y/n] ");
-	console.log("");
+	console.log();
 
 	if (typescript === true) {
 		dependencies.push("cross-env");
@@ -115,10 +122,10 @@ function deleteKeyFromJson5File(key, file) {
 	console.log(">     - People will think you like Microsoft");
 	console.log(">     - Depending on who you're working with, you will semi-frequently have to");
 	console.log(">       say: \"No, not Visual Studio, /Visual Studio Code/.\"");
-	console.log("");
+	console.log();
 
 	let vscode = await confirm("VS Code? [Y/n] ");
-	console.log("");
+	console.log();
 
 	if (vscode === true) {
 		mkdirpSync(path.join(baseDirectory, ".vscode"));
@@ -147,10 +154,10 @@ function deleteKeyFromJson5File(key, file) {
 	console.log("> =====");
 	console.log(">     - \"Middleware\" can be a confusing concept for beginners");
 	console.log(">     - Adds boilerplate");
-	console.log("");
+	console.log();
 
 	let express = await confirm("Express? [Y/n] ");
-	console.log("");
+	console.log();
 
 	if (express === true) {
 		dependencies.push("convict");
@@ -196,10 +203,10 @@ function deleteKeyFromJson5File(key, file) {
 		console.log("> Cons:");
 		console.log("> =====");
 		console.log(">     - None");
-		console.log("");
+		console.log();
 
 		let ejs = await confirm("EJS? [Y/n] ");
-		console.log("");
+		console.log();
 
 		if (ejs === true) {
 			dependencies.push("ejs");
@@ -248,10 +255,10 @@ function deleteKeyFromJson5File(key, file) {
 		console.log("> Cons:");
 		console.log("> =====");
 		console.log(">     - Adds a compilation step");
-		console.log("");
+		console.log();
 
 		let sass = await confirm("Sass? [Y/n] ");
-		console.log("");
+		console.log();
 
 		if (sass === true) {
 			addKeyValuePairToJson5File(["scripts", "sassc"], "sass --watch public/css/style.scss:public/css/style.min.css --no-cache --sourcemap=none --style=compressed", path.join(baseDirectory, "package.json"));
@@ -269,10 +276,10 @@ function deleteKeyFromJson5File(key, file) {
 		console.log("> Cons:");
 		console.log("> =====");
 		console.log(">     - Might be a dead project?");
-		console.log("");
+		console.log();
 
 		let csscomb = await confirm("CSSComb? [Y/n] ");
-		console.log("");
+		console.log();
 
 		if (csscomb === true) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
@@ -301,10 +308,10 @@ function deleteKeyFromJson5File(key, file) {
 			console.log("> Cons:");
 			console.log("> =====");
 			console.log(">     - Adds a compilation step");
-			console.log("");
+			console.log();
 
 			let rollup = await confirm("Rollup? [Y/n] ");
-			console.log("");
+			console.log();
 
 			if (rollup === true) {
 				devDependencies.push("rollup");
@@ -328,10 +335,10 @@ function deleteKeyFromJson5File(key, file) {
 			console.log("> Cons:");
 			console.log("> =====");
 			console.log(">     - None");
-			console.log("");
+			console.log();
 
 			let typedoc = await confirm("TypeDoc? [Y/n] ");
-			console.log("");
+			console.log();
 
 			if (typedoc === true) {
 				dependencies.push("typedoc");
@@ -345,7 +352,9 @@ function deleteKeyFromJson5File(key, file) {
 		}
 	}
 
-	console.log("\n> npm install " + dependencies.join(" ") + "\n");
+	readline.close();
+
+	console.log("> npm install " + dependencies.join(" ") + "\n");
 	execSync("npm install " + dependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });
 
 	console.log("> npm install --save-dev " + dependencies.join(" ") + "\n");
@@ -360,7 +369,14 @@ function deleteKeyFromJson5File(key, file) {
 		execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
 	} catch {}
 
-	readline.close();
+	console.log("kerplow will now self-destruct.");
+	await sleep(1000);
+	console.log("You will see an error message.")
+	await sleep(1000);
+	console.log("Please disregard.");
+	await sleep(1000);
+
+	console.log("KERPLOW!");
 
 	process.exitCode = 1;
 })();
