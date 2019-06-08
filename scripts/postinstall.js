@@ -370,13 +370,15 @@ function sleep(ms) {
 	} catch {}
 
 	console.log("kerplow will now self-destruct.");
-	await sleep(1000);
-	console.log("You will see an error message.")
-	await sleep(1000);
+	await sleep(1250);
+	console.log("You will see an error message.");
+	await sleep(1250);
 	console.log("Please disregard.");
-	await sleep(1000);
+	await sleep(1250);
 
+	console.log();
 	console.log("KERPLOW!");
+	console.log();
 
 	process.exitCode = 1;
 })();
