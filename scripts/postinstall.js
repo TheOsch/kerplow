@@ -142,7 +142,7 @@ function sleep(ms) {
 	console.log(">");
 	console.log("> Pros:");
 	console.log("> =====");
-	console.log(">     - De facto standard server framework for Node.js.");
+	console.log(">     - De facto standard server framework for Node.js");
 	console.log(">");
 	console.log("> Cons:");
 	console.log("> =====");
@@ -200,7 +200,7 @@ function sleep(ms) {
 		console.log(">");
 		console.log("> Pros:");
 		console.log("> =====");
-		console.log(">     - De facto standard Node.js templating.");
+		console.log(">     - De facto standard Node.js templating");
 		console.log(">");
 		console.log("> Cons:");
 		console.log("> =====");
