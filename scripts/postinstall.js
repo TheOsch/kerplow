@@ -67,7 +67,25 @@ function deleteKeyFromJson5File(key, file) {
 		execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
 	}
 
+	console.log("> TypeScript");
+	console.log("> ==========");
+	console.log(">");
+	console.log(">     TypeScript is a strict syntactical superset of JavaScript that adds");
+	console.log(">     optional static typing to the language.");
+	console.log("> ");
+	console.log("> Pros:");
+	console.log("> =====");
+	console.log(">     - Compile time type checking");
+	console.log(">     - Arguably better tooling");
+	console.log(">");
+	console.log("> Cons:");
+	console.log("> =====");
+	console.log(">     - People will think you like Microsoft, when you really just like Anders");
+	console.log(">       Hejlsberg");
+	console.log("");
+
 	let typescript = await confirm("TypeScript? [Y/n] ");
+	console.log("");
 
 	if (typescript === true) {
 		dependencies.push("cross-env");
@@ -80,7 +98,27 @@ function deleteKeyFromJson5File(key, file) {
 		fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
 	}
 
+	console.log("> Visual Studio Code");
+	console.log("> ==================");
+	console.log(">");
+	console.log(">     Visual Studio Code is a code editor with support for debugging, source");
+	console.log(">     control, and IDE-like code navigation and project management.");
+	console.log(">");
+	console.log("> Pros:");
+	console.log("> =====");
+	console.log(">     - IntelliSense");
+	console.log(">     - Better debugging than you thought possible");
+	console.log(">     - Extraordinary extensibility");
+	console.log(">");
+	console.log("> Cons:");
+	console.log("> =====");
+	console.log(">     - People will think you like Microsoft");
+	console.log(">     - Depending on who you're working with, you will semi-frequently have to");
+	console.log(">       say: \"No, not Visual Studio, /Visual Studio Code/.\"");
+	console.log("");
+
 	let vscode = await confirm("VS Code? [Y/n] ");
+	console.log("");
 
 	if (vscode === true) {
 		mkdirpSync(path.join(baseDirectory, ".vscode"));
@@ -96,7 +134,23 @@ function deleteKeyFromJson5File(key, file) {
 		fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
 	}
 
+	console.log("> Express");
+	console.log("> =======");
+	console.log(">");
+	console.log(">     Express is a web application framework for Node.js.");
+	console.log(">");
+	console.log("> Pros:");
+	console.log("> =====");
+	console.log(">     - De facto standard server framework for Node.js.");
+	console.log(">");
+	console.log("> Cons:");
+	console.log("> =====");
+	console.log(">     - \"Middleware\" can be a confusing concept for beginners");
+	console.log(">     - Adds boilerplate");
+	console.log("");
+
 	let express = await confirm("Express? [Y/n] ");
+	console.log("");
 
 	if (express === true) {
 		dependencies.push("convict");
@@ -130,7 +184,22 @@ function deleteKeyFromJson5File(key, file) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "router", "routes", "index.js"), path.join(baseDirectory, "router", "routes", "index.js"));
 		}
 
+		console.log("> EJS");
+		console.log("> ===");
+		console.log(">");
+		console.log(">     Embedded JavaScript templates.");
+		console.log(">");
+		console.log("> Pros:");
+		console.log("> =====");
+		console.log(">     - De facto standard Node.js templating.");
+		console.log(">");
+		console.log("> Cons:");
+		console.log("> =====");
+		console.log(">     - None");
+		console.log("");
+
 		let ejs = await confirm("EJS? [Y/n] ");
+		console.log("");
 
 		if (ejs === true) {
 			dependencies.push("ejs");
@@ -164,13 +233,46 @@ function deleteKeyFromJson5File(key, file) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "views", "partials", "_footer.ejs"), path.join(baseDirectory, "views", "partials", "_footer.ejs"));
 		}
 
-		let sass = await confirm("SASS? [Y/n] ");
+		console.log("> Sass");
+		console.log("> ====");
+		console.log(">");
+		console.log(">     Sass is a CSS pre-processor and CSS superset (SCSS) that makes writing CSS");
+		console.log(">     easier.");
+		console.log(">");
+		console.log("> Pros:");
+		console.log("> =====");
+		console.log(">     - Nesting");
+		console.log(">     - Variables");
+		console.log(">     - Inheritance");
+		console.log(">");
+		console.log("> Cons:");
+		console.log("> =====");
+		console.log(">     - Adds a compilation step");
+		console.log("");
+
+		let sass = await confirm("Sass? [Y/n] ");
+		console.log("");
 
 		if (sass === true) {
 			addKeyValuePairToJson5File(["scripts", "sassc"], "sass --watch public/css/style.scss:public/css/style.min.css --no-cache --sourcemap=none --style=compressed", path.join(baseDirectory, "package.json"));
 		}
 
+		console.log("> CSSComb");
+		console.log("> =======");
+		console.log(">");
+		console.log(">     CSScomb is a coding style formatter for CSS.");
+		console.log(">");
+		console.log("> Pros:");
+		console.log("> =====");
+		console.log(">     - Keeps your (S)CSS uniform and consistent");
+		console.log(">");
+		console.log("> Cons:");
+		console.log("> =====");
+		console.log(">     - Might be a dead project?");
+		console.log("");
+
 		let csscomb = await confirm("CSSComb? [Y/n] ");
+		console.log("");
 
 		if (csscomb === true) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
@@ -185,7 +287,24 @@ function deleteKeyFromJson5File(key, file) {
 		}
 	} else {
 		if (typescript === true) {
+			console.log("> Rollup");
+			console.log("> ======");
+			console.log(">");
+			console.log(">     Rollup is a module bundler for JavaScript.");
+			console.log(">");
+			console.log("> Pros:");
+			console.log("> =====");
+			console.log(">     - Tree-shaking");
+			console.log(">     - Plugin support");
+			console.log(">     - Minimal configuration");
+			console.log(">");
+			console.log("> Cons:");
+			console.log("> =====");
+			console.log(">     - Adds a compilation step");
+			console.log("");
+
 			let rollup = await confirm("Rollup? [Y/n] ");
+			console.log("");
 
 			if (rollup === true) {
 				devDependencies.push("rollup");
@@ -197,7 +316,22 @@ function deleteKeyFromJson5File(key, file) {
 				addKeyValuePairToJson5File(["scripts", "build"], "rollup --config --watch", path.join(baseDirectory, "package.json"));
 			}
 
+			console.log("> TypeDoc");
+			console.log("> ======");
+			console.log(">");
+			console.log(">     A documentation generator for TypeScript projects.");
+			console.log(">");
+			console.log("> Pros:");
+			console.log("> =====");
+			console.log(">     - It \"just works\"");
+			console.log(">");
+			console.log("> Cons:");
+			console.log("> =====");
+			console.log(">     - None");
+			console.log("");
+
 			let typedoc = await confirm("TypeDoc? [Y/n] ");
+			console.log("");
 
 			if (typedoc === true) {
 				dependencies.push("typedoc");
