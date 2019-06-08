@@ -132,12 +132,6 @@ function sleep(ms) {
 
 		fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
 
-		if (typescript === true) {
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
-		} else {
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "js", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
-		}
-
 		fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
 	}
 
@@ -183,12 +177,20 @@ function sleep(ms) {
 
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "router", "index.ts"), path.join(baseDirectory, "router", "index.ts"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "router", "routes", "index.ts"), path.join(baseDirectory, "router", "routes", "index.ts"));
+
+			if (vscode === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "express", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
+			}
 		} else {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "config.js"), path.join(baseDirectory, "config.js"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "server.js"), path.join(baseDirectory, "server.js"));
 
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "router", "index.js"), path.join(baseDirectory, "router", "index.js"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "router", "routes", "index.js"), path.join(baseDirectory, "router", "routes", "index.js"));
+
+			if (vscode === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "express", "js", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
+			}
 		}
 
 		console.log("> EJS");
@@ -347,8 +349,16 @@ function sleep(ms) {
 			}
 
 			addKeyValuePairToJson5File(["scripts", "start"], "cross-env TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"ES2015\\\"} ts-node index.ts", path.join(baseDirectory, "package.json"));
+
+			if (vscode === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
+			}
 		} else {
 			addKeyValuePairToJson5File(["scripts", "start"], "node index.js", path.join(baseDirectory, "package.json"));
+
+			if (vscode === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "js", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
+			}
 		}
 	}
 
