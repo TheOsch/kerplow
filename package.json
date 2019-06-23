@@ -18,14 +18,14 @@
   },
   "homepage": "https://github.com/brianjenkins94/kerplow#readme",
   "dependencies": {
-    "json5": "^2.1.0",
-    "mkdirp": "^0.5.1"
+    "json5": "latest",
+    "mkdirp": "latest"
   },
   "devDependencies": {
-    "@types/node": "^12.0.2",
-    "cross-env": "^5.2.0",
-    "ts-node": "^8.2.0",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "@types/node": "latest",
+    "cross-env": "latest",
+    "ts-node": "latest",
+    "tslint": "latest",
+    "typescript": "latest"
   }
 }
