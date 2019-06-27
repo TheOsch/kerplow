@@ -26,7 +26,6 @@
 		"only-arrow-functions": false,
 		"ordered-imports": false,
 		"prefer-conditional-expression": false,
-		"prefer-const": false,
 		"prefer-for-of": false,
 		"prefer-function-over-method": false,
 		"prefer-template": false,

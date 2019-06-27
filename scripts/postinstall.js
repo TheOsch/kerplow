@@ -1,21 +1,21 @@
 "use strict";
 
 // tslint:disable: no-require-imports
-let { execSync } = require("child_process");
-let fs = require("fs");
-let JSON5 = require("json5");
-let mkdirpSync = require("mkdirp").sync;
-let path = require("path");
-let readline = require("readline").createInterface({
+const { execSync } = require("child_process");
+const fs = require("fs");
+const JSON5 = require("json5");
+const mkdirpSync = require("mkdirp").sync;
+const path = require("path");
+const readline = require("readline").createInterface({
 	"input": process.stdin,
 	"output": process.stdout
 });
 
-let kerplowDirectory = path.join(__dirname, "..");
-let baseDirectory = path.join(__dirname, "..", "..", "..");
+const kerplowDirectory = path.join(__dirname, "..");
+const baseDirectory = path.join(__dirname, "..", "..", "..");
 
-let dependencies = [];
-let devDependencies = [];
+const dependencies = [];
+const devDependencies = [];
 
 function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
@@ -34,11 +34,11 @@ function confirm(prompt) {
 }
 
 function addKeyValuePairToJson5File(key, value, file) {
-	let parsedFile = JSON5.parse(fs.readFileSync(file));
+	const parsedFile = JSON5.parse(fs.readFileSync(file));
 
-	let lastKey = key.pop();
+	const lastKey = key.pop();
 
-	let parentKey = key.reduce(function(object, key) {
+	const parentKey = key.reduce(function(object, key) {
 		return object[key];
 	}, parsedFile);
 
@@ -48,11 +48,11 @@ function addKeyValuePairToJson5File(key, value, file) {
 }
 
 function deleteKeyFromJson5File(key, file) {
-	let parsedFile = JSON5.parse(fs.readFileSync(file));
+	const parsedFile = JSON5.parse(fs.readFileSync(file));
 
-	let lastKey = key.pop();
+	const lastKey = key.pop();
 
-	let parentKey = key.reduce(function(object, key) {
+	const parentKey = key.reduce(function(object, key) {
 		return object[key];
 	}, parsedFile);
 
@@ -91,7 +91,7 @@ function sleep(ms) {
 	console.log(">       Hejlsberg");
 	console.log();
 
-	let typescript = await confirm("TypeScript? [Y/n] ");
+	const typescript = await confirm("TypeScript? [Y/n] ");
 	console.log("\n");
 
 	if (typescript === true) {
@@ -124,7 +124,7 @@ function sleep(ms) {
 	console.log(">       say: \"No, not Visual Studio, /Visual Studio Code/.\"");
 	console.log();
 
-	let vscode = await confirm("VS Code? [Y/n] ");
+	const vscode = await confirm("VS Code? [Y/n] ");
 	console.log("\n");
 
 	if (vscode === true) {
@@ -150,7 +150,7 @@ function sleep(ms) {
 	console.log(">     - Adds boilerplate");
 	console.log();
 
-	let express = await confirm("Express? [Y/n] ");
+	const express = await confirm("Express? [Y/n] ");
 	console.log("\n");
 
 	if (express === true) {
@@ -207,7 +207,7 @@ function sleep(ms) {
 		console.log(">     - None");
 		console.log();
 
-		let ejs = await confirm("EJS? [Y/n] ");
+		const ejs = await confirm("EJS? [Y/n] ");
 		console.log("\n");
 
 		if (ejs === true) {
@@ -259,7 +259,7 @@ function sleep(ms) {
 		console.log(">     - Adds a compilation step");
 		console.log();
 
-		let sass = await confirm("Sass? [Y/n] ");
+		const sass = await confirm("Sass? [Y/n] ");
 		console.log("\n");
 
 		if (sass === true) {
@@ -280,7 +280,7 @@ function sleep(ms) {
 		console.log(">     - Might be a dead project?");
 		console.log();
 
-		let csscomb = await confirm("CSSComb? [Y/n] ");
+		const csscomb = await confirm("CSSComb? [Y/n] ");
 		console.log("\n");
 
 		if (csscomb === true) {
@@ -312,7 +312,7 @@ function sleep(ms) {
 			console.log(">     - Adds a compilation step");
 			console.log();
 
-			let rollup = await confirm("Rollup? [Y/n] ");
+			const rollup = await confirm("Rollup? [Y/n] ");
 			console.log("\n");
 
 			if (rollup === true) {
@@ -339,7 +339,7 @@ function sleep(ms) {
 			console.log(">     - None");
 			console.log();
 
-			let typedoc = await confirm("TypeDoc? [Y/n] ");
+			const typedoc = await confirm("TypeDoc? [Y/n] ");
 			console.log("\n");
 
 			if (typedoc === true) {
