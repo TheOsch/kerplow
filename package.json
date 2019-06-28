@@ -2,6 +2,7 @@
   "name": "kerplow",
   "version": "1.0.0",
   "description": "Project configuration that self-destructs!",
+  "bin": "./scripts/postinstall.js",
   "scripts": {
     "postinstall": "node scripts/postinstall.js",
     "start": "node scripts/postinstall.js",
