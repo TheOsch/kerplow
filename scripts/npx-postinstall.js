@@ -4,10 +4,10 @@
 
 // tslint:disable: no-require-imports
 const { execSync } = require("child_process");
-const argv = require("minimist")(process.argv, {
+const argv = require("minimist")(process.argv.slice(2), {
 	"alias": {
-		"update": "u",
-		"yes": "y"
+		"u": "update",
+		"y": "yes"
 	},
 	"boolean": ["update", "yes"]
 });
