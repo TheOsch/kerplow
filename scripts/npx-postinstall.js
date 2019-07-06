@@ -42,6 +42,8 @@ function confirm(prompt) {
 
 if (argv["update"] === true) {
 	(async function() {
+		console.log(argv);
+
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ")) === false) {
 				return;
