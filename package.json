@@ -23,10 +23,6 @@
     "mkdirp": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "cross-env": "latest",
-    "ts-node": "latest",
-    "tslint": "latest",
-    "typescript": "latest"
+    "tslint": "latest"
   }
 }
