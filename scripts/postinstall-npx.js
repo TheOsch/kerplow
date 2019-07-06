@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 "use strict";
 
 // tslint:disable: no-require-imports
