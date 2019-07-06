@@ -59,8 +59,6 @@ if (argv["update"] === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
 			}
 		}
-
-		return;
 	})();
 } else {
 	const dependencies = [];
