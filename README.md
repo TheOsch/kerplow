@@ -47,133 +47,135 @@ npm install brianjenkins94/kerplow --production
 
 ### Example
 
-```
-$ npx brianjenkins94/kerplow
-...
-About to write to /Users/bjenks/Desktop/foo/package.json:
+<details>
+	<summary><code>$ npx brianjenkins94/kerplow</code></summary>
 
-{
-  "name": "foo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
+	...
+	About to write to /Users/bjenks/Desktop/foo/package.json:
+
+	{
+	  "name": "foo",
+	  "version": "1.0.0",
+	  "description": "",
+	  "main": "index.js",
+	  "scripts": {
+	    "test": "echo \"Error: no test specified\" && exit 1"
+	  },
+	  "author": "",
+	  "license": "ISC"
+	}
 
 
-Is this OK? (yes) 
+	Is this OK? (yes) 
 
-> TypeScript
-> ==========
->
->     TypeScript is a strict syntactical superset of JavaScript that adds
->     optional static typing to the language.
->
-> Pros:
-> =====
->     - Compile time type checking
->     - Great tooling
->
-> Cons:
-> =====
->     - People will think you like Microsoft, when you really just like Anders
->       Hejlsberg.
+	> TypeScript
+	> ==========
+	>
+	>     TypeScript is a strict syntactical superset of JavaScript that adds
+	>     optional static typing to the language.
+	>
+	> Pros:
+	> =====
+	>     - Compile time type checking
+	>     - Great tooling
+	>
+	> Cons:
+	> =====
+	>     - People will think you like Microsoft, when you really just like Anders
+	>       Hejlsberg.
 
-TypeScript? [Y/n] 
+	TypeScript? [Y/n] 
 
-> Visual Studio Code
-> ==================
->
->     Visual Studio Code is a code editor with support for debugging, source
->     control, and IDE-like code navigation and project management.
->
-> Pros:
-> =====
->     - IntelliSense
->     - Better debugging than you thought possible
->     - Extraordinary extensibility
->
-> Cons:
-> =====
->     - People will think you like Microsoft
->     - Depending on who you're working with, you will semi-frequently have to
->       say: "No, not Visual Studio, /Visual Studio Code/."
+	> Visual Studio Code
+	> ==================
+	>
+	>     Visual Studio Code is a code editor with support for debugging, source
+	>     control, and IDE-like code navigation and project management.
+	>
+	> Pros:
+	> =====
+	>     - IntelliSense
+	>     - Better debugging than you thought possible
+	>     - Extraordinary extensibility
+	>
+	> Cons:
+	> =====
+	>     - People will think you like Microsoft
+	>     - Depending on who you're working with, you will semi-frequently have to
+	>       say: "No, not Visual Studio, /Visual Studio Code/."
 
-VS Code? [Y/n] 
+	VS Code? [Y/n] 
 
-> Express
-> =======
->
->     Express is a web application framework for Node.js.
->
-> Pros:
-> =====
->     - De facto standard server framework for Node.js
->
-> Cons:
-> =====
->     - "Middleware" can be a confusing concept for beginners
->     - Adds boilerplate
+	> Express
+	> =======
+	>
+	>     Express is a web application framework for Node.js.
+	>
+	> Pros:
+	> =====
+	>     - De facto standard server framework for Node.js
+	>
+	> Cons:
+	> =====
+	>     - "Middleware" can be a confusing concept for beginners
+	>     - Adds boilerplate
 
-Express? [Y/n] 
+	Express? [Y/n] 
 
-> EJS
-> ===
->
->     Embedded JavaScript templates.
->
-> Pros:
-> =====
->     - De facto standard Node.js templating
->
-> Cons:
-> =====
->     - None
+	> EJS
+	> ===
+	>
+	>     Embedded JavaScript templates.
+	>
+	> Pros:
+	> =====
+	>     - De facto standard Node.js templating
+	>
+	> Cons:
+	> =====
+	>     - None
 
-EJS? [Y/n] 
+	EJS? [Y/n] 
 
-> Sass
-> ====
->
->     Sass is a CSS pre-processor and CSS superset (SCSS) that makes writing CSS
->     easier.
->
-> Pros:
-> =====
->     - Nesting
->     - Variables
->     - Inheritance
->
-> Cons:
-> =====
->     - Adds a compilation step
+	> Sass
+	> ====
+	>
+	>     Sass is a CSS pre-processor and CSS superset (SCSS) that makes writing CSS
+	>     easier.
+	>
+	> Pros:
+	> =====
+	>     - Nesting
+	>     - Variables
+	>     - Inheritance
+	>
+	> Cons:
+	> =====
+	>     - Adds a compilation step
 
-Sass? [Y/n] 
+	Sass? [Y/n] 
 
-> CSSComb
-> =======
->
->     CSScomb is a coding style formatter for CSS.
->
-> Pros:
-> =====
->     - Keeps your (S)CSS uniform and consistent
->
-> Cons:
-> =====
->     - Might be a dead project?
+	> CSSComb
+	> =======
+	>
+	>     CSScomb is a coding style formatter for CSS.
+	>
+	> Pros:
+	> =====
+	>     - Keeps your (S)CSS uniform and consistent
+	>
+	> Cons:
+	> =====
+	>     - Might be a dead project?
 
-CSSComb? [Y/n] 
+	CSSComb? [Y/n] 
 
-> npm install cross-env typescript ts-node convict express helmet morgan nodemon ejs
-...
-> npm install --save-dev cross-env typescript ts-node convict express helmet morgan nodemon ejs
-...
-```
+	> npm install cross-env typescript ts-node convict express helmet morgan nodemon ejs
+	...
+	> npm install --save-dev cross-env typescript ts-node convict express helmet morgan nodemon ejs
+	...
+
+</details> 
 
 ### License
 
