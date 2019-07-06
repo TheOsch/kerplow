@@ -2,6 +2,10 @@
 
 "use strict";
 
+if (process.argv[0] === "npx") {
+	process.exit(0);
+}
+
 // tslint:disable: no-require-imports
 const { execSync } = require("child_process");
 const fs = require("fs");

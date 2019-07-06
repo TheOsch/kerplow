@@ -2,9 +2,9 @@
   "name": "kerplow",
   "version": "1.0.0",
   "description": "Project configuration that self-destructs!",
-  "bin": "./scripts/postinstall-npx.js",
+  "bin": "./scripts/npx-postinstall.js",
   "scripts": {
-    "start": "node scripts/postinstall-npx.js",
+    "postinstall": "node scripts/npm-postinstall.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

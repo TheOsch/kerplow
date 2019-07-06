@@ -35,7 +35,13 @@
 #### "Installation"
 
 ```bash
-npx brianjenkins94/kerplow --production [--update]
+npx brianjenkins94/kerplow [--update|-u] [--yes|-y]
+```
+
+_or_
+
+```bash
+npm install brianjenkins94/kerplow --production
 ```
 
 ### License

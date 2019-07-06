@@ -4,7 +4,14 @@
 
 // tslint:disable: no-require-imports
 const { execSync } = require("child_process");
-const argv = require("minimist")(process.argv.slice(2));
+const argv = require("minimist")(process.argv, {
+	"alias": {
+		"update": "u",
+		"yes": "y"
+	},
+	"boolean": ["update", "yes"]
+});
+
 const fs = require("fs");
 const JSON5 = require("json5");
 const mkdirpSync = require("mkdirp").sync;
@@ -42,13 +49,13 @@ if (argv["update"] === true) {
 		}
 
 		if (!fs.existsSync(path.join(baseDirectory, "tslint.json"))) {
-			if ((await confirm("Overwrite `tslint.json`? [Y/n] ")) === true) {
+			if (argv["yes"] === true || (await confirm("Overwrite `tslint.json`? [Y/n] ")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
 			}
 		}
 
 		if (!fs.existsSync(path.join(baseDirectory, "public", "css", ".csscomb.json"))) {
-			if ((await confirm("Overwrite `.csscomb.json`? [Y/n] ")) === true) {
+			if (argv["yes"] === true || (await confirm("Overwrite `.csscomb.json`? [Y/n] ")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
 			}
 		}
@@ -71,7 +78,7 @@ if (argv["update"] === true) {
 		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 	}
 
-	// tslint:disable-next-line: no-floating-promises
+	// tslint:disable-next-line: cyclomatic-complexity no-floating-promises
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
@@ -95,7 +102,7 @@ if (argv["update"] === true) {
 		console.log(">       Hejlsberg.");
 		console.log();
 
-		const typescript = await confirm("TypeScript? [Y/n] ");
+		const typescript = argv["yes"] === true || await confirm("TypeScript? [Y/n] ");
 		console.log();
 
 		if (typescript === true) {
@@ -128,7 +135,7 @@ if (argv["update"] === true) {
 		console.log(">       say: \"No, not Visual Studio, /Visual Studio Code/.\"");
 		console.log();
 
-		const vscode = await confirm("VS Code? [Y/n] ");
+		const vscode = argv["yes"] === true || await confirm("VS Code? [Y/n] ");
 		console.log();
 
 		if (vscode === true) {
@@ -154,7 +161,7 @@ if (argv["update"] === true) {
 		console.log(">     - Adds boilerplate");
 		console.log();
 
-		const express = await confirm("Express? [Y/n] ");
+		const express = argv["yes"] === true || await confirm("Express? [Y/n] ");
 		console.log();
 
 		if (express === true) {
@@ -211,7 +218,7 @@ if (argv["update"] === true) {
 			console.log(">     - None");
 			console.log();
 
-			const ejs = await confirm("EJS? [Y/n] ");
+			const ejs = argv["yes"] === true || await confirm("EJS? [Y/n] ");
 			console.log();
 
 			if (ejs === true) {
@@ -263,7 +270,7 @@ if (argv["update"] === true) {
 			console.log(">     - Adds a compilation step");
 			console.log();
 
-			const sass = await confirm("Sass? [Y/n] ");
+			const sass = argv["yes"] === true || await confirm("Sass? [Y/n] ");
 			console.log();
 
 			if (sass === true) {
@@ -284,7 +291,7 @@ if (argv["update"] === true) {
 			console.log(">     - Might be a dead project?");
 			console.log();
 
-			const csscomb = await confirm("CSSComb? [Y/n] ");
+			const csscomb = argv["yes"] === true || await confirm("CSSComb? [Y/n] ");
 			console.log();
 
 			if (csscomb === true) {
@@ -316,7 +323,7 @@ if (argv["update"] === true) {
 				console.log(">     - Adds a compilation step");
 				console.log();
 
-				const rollup = await confirm("Rollup? [Y/n] ");
+				const rollup = argv["yes"] === true || await confirm("Rollup? [Y/n] ");
 				console.log();
 
 				if (rollup === true) {
@@ -343,7 +350,7 @@ if (argv["update"] === true) {
 				console.log(">     - None");
 				console.log();
 
-				const typedoc = await confirm("TypeDoc? [Y/n] ");
+				const typedoc = argv["yes"] === true || await confirm("TypeDoc? [Y/n] ");
 				console.log();
 
 				if (typedoc === true) {
