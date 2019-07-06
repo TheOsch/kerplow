@@ -45,7 +45,7 @@ _or_
 npm install brianjenkins94/kerplow --production
 ```
 
-### Example
+#### Example
 
 <details>
 	<summary><code>$ npx brianjenkins94/kerplow</code></summary>
