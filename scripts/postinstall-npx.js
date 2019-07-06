@@ -14,7 +14,7 @@ const readline = require("readline").createInterface({
 	"output": process.stdout
 });
 
-const kerplowDirectory = path.join(__dirname);
+const kerplowDirectory = path.join(__dirname, "..");
 const baseDirectory = process.cwd();
 
 function confirm(prompt) {
@@ -92,7 +92,7 @@ if (argv["update"] === true) {
 		console.log("> Cons:");
 		console.log("> =====");
 		console.log(">     - People will think you like Microsoft, when you really just like Anders");
-		console.log(">       Hejlsberg");
+		console.log(">       Hejlsberg.");
 		console.log();
 
 		const typescript = await confirm("TypeScript? [Y/n] ");

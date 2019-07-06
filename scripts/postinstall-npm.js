@@ -90,7 +90,7 @@ function sleep(ms) {
 	console.log("> Cons:");
 	console.log("> =====");
 	console.log(">     - People will think you like Microsoft, when you really just like Anders");
-	console.log(">       Hejlsberg");
+	console.log(">       Hejlsberg.");
 	console.log();
 
 	const typescript = await confirm("TypeScript? [Y/n] ");
