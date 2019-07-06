@@ -43,18 +43,18 @@ function confirm(prompt) {
 if (argv["update"] === true) {
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
-			if ((await confirm("Are you sure you're in the right place? [y/N] ")) === false) {
+			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ")) === false) {
 				return;
 			}
 		}
 
-		if (!fs.existsSync(path.join(baseDirectory, "tslint.json"))) {
+		if (fs.existsSync(path.join(baseDirectory, "tslint.json"))) {
 			if (argv["yes"] === true || (await confirm("Overwrite `tslint.json`? [Y/n] ")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
 			}
 		}
 
-		if (!fs.existsSync(path.join(baseDirectory, "public", "css", ".csscomb.json"))) {
+		if (fs.existsSync(path.join(baseDirectory, "public", "css", ".csscomb.json"))) {
 			if (argv["yes"] === true || (await confirm("Overwrite `.csscomb.json`? [Y/n] ")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
 			}
