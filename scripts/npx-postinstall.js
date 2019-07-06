@@ -2,9 +2,6 @@
 
 "use strict";
 
-console.log(process.argv);
-console.log(process.argv0);
-
 // tslint:disable: no-require-imports
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv, {

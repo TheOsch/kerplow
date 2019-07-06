@@ -2,10 +2,7 @@
 
 "use strict";
 
-console.log(process.argv);
-console.log(process.argv0);
-
-if (process.argv0 === "npx") {
+if (__dirname.indexOf("_npx") !== -1) {
 	process.exit(0);
 }
 
