@@ -47,7 +47,7 @@ npm install brianjenkins94/kerplow --production
 
 ### Example
 
-```bash
+```
 $ npx brianjenkins94/kerplow
 ...
 About to write to /Users/bjenks/Desktop/foo/package.json:
