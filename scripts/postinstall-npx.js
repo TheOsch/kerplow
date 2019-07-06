@@ -14,8 +14,8 @@ const readline = require("readline").createInterface({
 	"output": process.stdout
 });
 
-const kerplowDirectory = path.join(__dirname, "..");
-const baseDirectory = path.join(__dirname, "..", "..", "..");
+const kerplowDirectory = path.join(__dirname);
+const baseDirectory = process.cwd();
 
 function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
@@ -67,20 +67,6 @@ if (argv["update"] === true) {
 		}, parsedFile);
 
 		parentKey[lastKey] = value;
-
-		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
-	}
-
-	function deleteKeyFromJson5File(key, file) {
-		const parsedFile = JSON5.parse(fs.readFileSync(file));
-
-		const lastKey = key.pop();
-
-		const parentKey = key.reduce(function(object, key) {
-			return object[key];
-		}, parsedFile);
-
-		delete parentKey[lastKey];
 
 		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 	}
@@ -387,10 +373,5 @@ if (argv["update"] === true) {
 
 		console.log("> npm install --save-dev " + dependencies.join(" ") + "\n");
 		execSync("npm install --save-dev " + devDependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });
-
-		console.log("> npm remove kerplow\n");
-
-		deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package.json"));
-		deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package-lock.json"));
 	})();
 }
