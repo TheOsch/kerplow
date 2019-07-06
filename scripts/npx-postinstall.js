@@ -42,8 +42,6 @@ function confirm(prompt) {
 
 if (argv["update"] === true) {
 	(async function() {
-		console.log(argv);
-
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ")) === false) {
 				return;
@@ -61,6 +59,8 @@ if (argv["update"] === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
 			}
 		}
+
+		return;
 	})();
 } else {
 	const dependencies = [];
