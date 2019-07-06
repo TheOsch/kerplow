@@ -35,13 +35,13 @@
 
 #### "Installation"
 
-```bash
+```
 npx brianjenkins94/kerplow [--update|-u] [--yes|-y]
 ```
 
 _or_
 
-```bash
+```
 npm install brianjenkins94/kerplow --production
 ```
 
@@ -50,24 +50,6 @@ npm install brianjenkins94/kerplow --production
 <details>
 	<summary><code>$ npx brianjenkins94/kerplow</code></summary>
 	<p>
-
-	...
-	About to write to /Users/bjenks/Desktop/foo/package.json:
-
-	{
-	  "name": "foo",
-	  "version": "1.0.0",
-	  "description": "",
-	  "main": "index.js",
-	  "scripts": {
-	    "test": "echo \"Error: no test specified\" && exit 1"
-	  },
-	  "author": "",
-	  "license": "ISC"
-	}
-
-
-	Is this OK? (yes) 
 
 	> TypeScript
 	> ==========
@@ -175,8 +157,7 @@ npm install brianjenkins94/kerplow --production
 	...
 	> npm install --save-dev cross-env typescript ts-node convict express helmet morgan nodemon ejs
 	...
-
-	</p>
+<!-- --></p>
 </details> 
 
 ### License
