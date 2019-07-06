@@ -49,6 +49,7 @@ npm install brianjenkins94/kerplow --production
 
 <details>
 	<summary><code>$ npx brianjenkins94/kerplow</code></summary>
+	<p>
 
 	...
 	About to write to /Users/bjenks/Desktop/foo/package.json:
@@ -175,6 +176,7 @@ npm install brianjenkins94/kerplow --production
 	> npm install --save-dev cross-env typescript ts-node convict express helmet morgan nodemon ejs
 	...
 
+	</p>
 </details> 
 
 ### License
