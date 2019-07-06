@@ -12,6 +12,9 @@ const readline = require("readline").createInterface({
 	"output": process.stdout
 });
 
+const kerplowDirectory = path.join(__dirname, "..");
+const baseDirectory = path.join(__dirname, "..", "..", "..");
+
 function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
 		readline.question(prompt, async function(answer) {
@@ -27,15 +30,6 @@ function confirm(prompt) {
 		});
 	});
 }
-
-function sleep(ms) {
-	return new Promise(function(resolve, reject) {
-		setTimeout(resolve, ms);
-	});
-}
-
-const kerplowDirectory = path.join(__dirname, "..");
-const baseDirectory = path.join(__dirname, "..", "..", "..");
 
 if (argv["update"] === true) {
 	(async function() {
@@ -396,24 +390,5 @@ if (argv["update"] === true) {
 
 		deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package.json"));
 		deleteKeyFromJson5File(["dependencies", "kerplow"], path.join(baseDirectory, "package-lock.json"));
-
-		try {
-			execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
-		} catch {}
-
-		console.log("kerplow will now self-destruct.");
-		await sleep(1500);
-
-		console.log("You will see an error message.");
-		await sleep(1500);
-
-		console.log("Please disregard.");
-		await sleep(1500);
-
-		console.log();
-		console.log("KERPLOW!");
-		console.log();
 	})();
 }
-
-process.exitCode = 1;
