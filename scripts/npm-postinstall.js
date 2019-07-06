@@ -2,7 +2,7 @@
 
 "use strict";
 
-if (process.argv[0] === "npx") {
+if (process.argv0[0] === "npx") {
 	process.exit(0);
 }
 
