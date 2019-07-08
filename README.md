@@ -67,7 +67,7 @@ npm install brianjenkins94/kerplow --production
 	>     - People will think you like Microsoft, when you really just like Anders
 	>       Hejlsberg.
 
-	TypeScript? [Y/n] 
+	TypeScript? [Y/n]
 
 	> Visual Studio Code
 	> ==================
@@ -87,7 +87,7 @@ npm install brianjenkins94/kerplow --production
 	>     - Depending on who you're working with, you will semi-frequently have to
 	>       say: "No, not Visual Studio, /Visual Studio Code/."
 
-	VS Code? [Y/n] 
+	VS Code? [Y/n]
 
 	> Express
 	> =======
@@ -103,7 +103,7 @@ npm install brianjenkins94/kerplow --production
 	>     - "Middleware" can be a confusing concept for beginners
 	>     - Adds boilerplate
 
-	Express? [Y/n] 
+	Express? [Y/n]
 
 	> EJS
 	> ===
@@ -118,7 +118,7 @@ npm install brianjenkins94/kerplow --production
 	> =====
 	>     - None
 
-	EJS? [Y/n] 
+	EJS? [Y/n]
 
 	> Sass
 	> ====
@@ -136,29 +136,14 @@ npm install brianjenkins94/kerplow --production
 	> =====
 	>     - Adds a compilation step
 
-	Sass? [Y/n] 
-
-	> CSSComb
-	> =======
-	>
-	>     CSScomb is a coding style formatter for CSS.
-	>
-	> Pros:
-	> =====
-	>     - Keeps your (S)CSS uniform and consistent
-	>
-	> Cons:
-	> =====
-	>     - Might be a dead project?
-
-	CSSComb? [Y/n] 
+	Sass? [Y/n]
 
 	> npm install cross-env typescript ts-node convict express helmet morgan nodemon ejs
 	...
 	> npm install --save-dev cross-env typescript ts-node convict express helmet morgan nodemon ejs
 	...
 <!-- --></p>
-</details> 
+</details>
 
 ### License
 

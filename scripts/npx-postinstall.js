@@ -53,12 +53,6 @@ if (argv["update"] === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
 			}
 		}
-
-		if (fs.existsSync(path.join(baseDirectory, "public", "css", ".csscomb.json"))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `.csscomb.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
-			}
-		}
 	})();
 } else {
 	const dependencies = [];
@@ -275,29 +269,6 @@ if (argv["update"] === true) {
 
 			if (sass === true) {
 				addKeyValuePairToJson5File(["scripts", "sassc"], "sass --watch public/css/style.scss:public/css/style.min.css --no-cache --sourcemap=none --style=compressed", path.join(baseDirectory, "package.json"));
-			}
-
-			console.log("> CSSComb");
-			console.log("> =======");
-			console.log(">");
-			console.log(">     CSScomb is a coding style formatter for CSS.");
-			console.log(">");
-			console.log("> Pros:");
-			console.log("> =====");
-			console.log(">     - Keeps your (S)CSS uniform and consistent");
-			console.log(">");
-			console.log("> Cons:");
-			console.log("> =====");
-			console.log(">     - Might be a dead project?");
-			console.log();
-
-			const csscomb = argv["yes"] === true || await confirm("CSSComb? [Y/n] ");
-			console.log();
-
-			if (csscomb === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", ".csscomb.json"), path.join(baseDirectory, "public", "css", ".csscomb.json"));
-
-				addKeyValuePairToJson5File(["scripts", "csscomb"], "csscomb --config public/css/.csscomb.json public/css/style.scss public/css/partials/*.scss", path.join(baseDirectory, "package.json"));
 			}
 
 			if (typescript === true) {
