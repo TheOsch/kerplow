@@ -2,7 +2,7 @@
 
 "use strict";
 
-// tslint:disable: no-require-imports
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv.slice(2), {
 	"alias": {
@@ -48,15 +48,21 @@ if (argv["update"] === true) {
 			}
 		}
 
-		if (fs.existsSync(path.join(baseDirectory, "tslint.json"))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `tslint.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
+		if (fs.existsSync(path.join(baseDirectory, ".eslintrc.json"))) {
+			if (argv["yes"] === true || (await confirm("Overwrite `.eslintrc.json`? [Y/n] ")) === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
+			}
+		}
+
+		if (fs.existsSync(path.join(baseDirectory, ".vscode", "extensions.json"))) {
+			if (argv["yes"] === true || (await confirm("Overwrite `extensions.json`? [Y/n] ")) === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
 			}
 		}
 	})();
 } else {
 	const dependencies = [];
-	const devDependencies = [];
+	const devDependencies = ["eslint"];
 
 	function addKeyValuePairToJson5File(key, value, file) {
 		const parsedFile = JSON5.parse(fs.readFileSync(file));
@@ -72,7 +78,6 @@ if (argv["update"] === true) {
 		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 	}
 
-	// tslint:disable-next-line: cyclomatic-complexity no-floating-promises
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
@@ -104,8 +109,9 @@ if (argv["update"] === true) {
 			dependencies.push("typescript");
 			dependencies.push("ts-node");
 
-			devDependencies.push("tslint");
 			devDependencies.push("@types/node");
+			devDependencies.push("@typescript-eslint/eslint-plugin");
+			devDependencies.push("@typescript-eslint/parser");
 
 			fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
 		}

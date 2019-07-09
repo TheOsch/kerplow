@@ -23,6 +23,9 @@
     "mkdirp": "latest"
   },
   "devDependencies": {
-    "tslint": "latest"
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "typescript": "latest"
   }
 }

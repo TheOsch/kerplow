@@ -6,7 +6,7 @@ if (__dirname.indexOf("_npx") !== -1) {
 	process.exit(0);
 }
 
-// tslint:disable: no-require-imports
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { execSync } = require("child_process");
 const fs = require("fs");
 const JSON5 = require("json5");
@@ -21,7 +21,7 @@ const kerplowDirectory = path.join(__dirname, "..");
 const baseDirectory = path.join(__dirname, "..", "..", "..");
 
 const dependencies = [];
-const devDependencies = [];
+const devDependencies = ["eslint"];
 
 function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
@@ -73,7 +73,6 @@ function sleep(ms) {
 	});
 }
 
-// tslint:disable-next-line: no-floating-promises
 (async function() {
 	if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 		execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
@@ -105,10 +104,12 @@ function sleep(ms) {
 		dependencies.push("typescript");
 		dependencies.push("ts-node");
 
-		devDependencies.push("tslint");
 		devDependencies.push("@types/node");
+		devDependencies.push("@typescript-eslint/eslint-plugin");
+		devDependencies.push("@typescript-eslint/parser");
+		devDependencies.push("typescript");
 
-		fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
+		fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
 	}
 
 	console.log("> Visual Studio Code");

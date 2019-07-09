@@ -1,0 +1,17 @@
+{
+	"env": {
+		"es6": true,
+		"node": true
+    },
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"rules": {
+		"no-inner-declarations": "off",
+		"@typescript-eslint/indent": ["error", "tab"]
+	}
+}
