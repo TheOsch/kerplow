@@ -113,7 +113,7 @@ if (argv["update"] === true) {
 			devDependencies.push("@typescript-eslint/eslint-plugin");
 			devDependencies.push("@typescript-eslint/parser");
 
-			fs.copyFileSync(path.join(kerplowDirectory, "tslint.json"), path.join(baseDirectory, "tslint.json"));
+			fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
 		}
 
 		console.log("> Visual Studio Code");
