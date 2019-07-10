@@ -2525,7 +2525,7 @@ body {
 	}
 
 		#header > h1 a {
-			font-size: 1.25em;
+			font-size: 100%;
 		}
 
 	#header > a {
