@@ -2,6 +2,7 @@
 
 "use strict";
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv.slice(2), {
@@ -28,7 +29,7 @@ function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
 		readline.question(prompt, async function(answer) {
 			if (/^(y(es)?)?$/i.test(answer)) {
-				resolve(true)
+				resolve(true);
 			} else if (/^n(o)?$/i.test(answer)) {
 				resolve(false);
 			} else {
@@ -41,6 +42,7 @@ function confirm(prompt) {
 }
 
 if (argv["update"] === true) {
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ")) === false) {
@@ -62,7 +64,7 @@ if (argv["update"] === true) {
 	})();
 } else {
 	const dependencies = [];
-	const devDependencies = ["eslint"];
+	const devDependencies = ["eslint", "@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "typescript"];
 
 	function addKeyValuePairToJson5File(key, value, file) {
 		const parsedFile = JSON5.parse(fs.readFileSync(file));
@@ -78,11 +80,15 @@ if (argv["update"] === true) {
 		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
 			console.log();
 		}
+
+		fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
+		fs.copyFileSync(path.join(kerplowDirectory, "tsconfig.json"), path.join(baseDirectory, "tsconfig.json"));
 
 		console.log("> TypeScript");
 		console.log("> ==========");
@@ -105,15 +111,10 @@ if (argv["update"] === true) {
 		console.log();
 
 		if (typescript === true) {
-			dependencies.push("cross-env");
 			dependencies.push("typescript");
 			dependencies.push("ts-node");
 
 			devDependencies.push("@types/node");
-			devDependencies.push("@typescript-eslint/eslint-plugin");
-			devDependencies.push("@typescript-eslint/parser");
-
-			fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
 		}
 
 		console.log("> Visual Studio Code");
@@ -278,7 +279,7 @@ if (argv["update"] === true) {
 			}
 
 			if (typescript === true) {
-				addKeyValuePairToJson5File(["scripts", "start"], "cross-env TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"ES2015\\\"} nodemon --watch **/*.ts --exec ts-node server.ts", path.join(baseDirectory, "package.json"));
+				addKeyValuePairToJson5File(["scripts", "start"], "nodemon --watch **/*.ts --exec ts-node server.ts", path.join(baseDirectory, "package.json"));
 			} else {
 				addKeyValuePairToJson5File(["scripts", "start"], "nodemon server.js", path.join(baseDirectory, "package.json"));
 			}
@@ -336,7 +337,7 @@ if (argv["update"] === true) {
 					addKeyValuePairToJson5File(["scripts", "typedoc"], "typedoc --mode file . --out docs --exclude **/node_modules/** --module ES2015 --moduleResolution Node", path.join(baseDirectory, "package.json"));
 				}
 
-				addKeyValuePairToJson5File(["scripts", "start"], "cross-env TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"ES2015\\\"} ts-node index.ts", path.join(baseDirectory, "package.json"));
+				addKeyValuePairToJson5File(["scripts", "start"], "ts-node index.ts", path.join(baseDirectory, "package.json"));
 
 				if (vscode === true) {
 					fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));

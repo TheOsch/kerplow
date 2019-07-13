@@ -16,11 +16,7 @@ export default {
 		//commonJs(),
 		//nodeBuiltins(),
 		//nodeGlobals(),
-		typescript({
-			"target": "ES2015",
-			"sourceMap": false,
-			"experimentalDecorators": true
-		})
+		typescript()
 	],
 	"watch": {
 		"clearScreen": false

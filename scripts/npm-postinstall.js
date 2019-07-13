@@ -6,6 +6,7 @@ if (__dirname.indexOf("_npx") !== -1) {
 	process.exit(0);
 }
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { execSync } = require("child_process");
 const fs = require("fs");
@@ -21,13 +22,13 @@ const kerplowDirectory = path.join(__dirname, "..");
 const baseDirectory = path.join(__dirname, "..", "..", "..");
 
 const dependencies = [];
-const devDependencies = ["eslint"];
+const devDependencies = ["eslint", "@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "typescript"];
 
 function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
 		readline.question(prompt, async function(answer) {
 			if (/^(y(es)?)?$/i.test(answer)) {
-				resolve(true)
+				resolve(true);
 			} else if (/^n(o)?$/i.test(answer)) {
 				resolve(false);
 			} else {
@@ -73,11 +74,15 @@ function sleep(ms) {
 	});
 }
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async function() {
 	if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 		execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
 		console.log();
 	}
+
+	fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
+	fs.copyFileSync(path.join(kerplowDirectory, "tsconfig.json"), path.join(baseDirectory, "tsconfig.json"));
 
 	console.log("> TypeScript");
 	console.log("> ==========");
@@ -100,16 +105,10 @@ function sleep(ms) {
 	console.log();
 
 	if (typescript === true) {
-		dependencies.push("cross-env");
 		dependencies.push("typescript");
 		dependencies.push("ts-node");
 
 		devDependencies.push("@types/node");
-		devDependencies.push("@typescript-eslint/eslint-plugin");
-		devDependencies.push("@typescript-eslint/parser");
-		devDependencies.push("typescript");
-
-		fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
 	}
 
 	console.log("> Visual Studio Code");
@@ -274,7 +273,7 @@ function sleep(ms) {
 		}
 
 		if (typescript === true) {
-			addKeyValuePairToJson5File(["scripts", "start"], "cross-env TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"ES2015\\\"} nodemon --watch **/*.ts --exec ts-node server.ts", path.join(baseDirectory, "package.json"));
+			addKeyValuePairToJson5File(["scripts", "start"], "nodemon --watch **/*.ts --exec ts-node server.ts", path.join(baseDirectory, "package.json"));
 		} else {
 			addKeyValuePairToJson5File(["scripts", "start"], "nodemon server.js", path.join(baseDirectory, "package.json"));
 		}
@@ -332,7 +331,7 @@ function sleep(ms) {
 				addKeyValuePairToJson5File(["scripts", "typedoc"], "typedoc --mode file . --out docs --exclude **/node_modules/** --module ES2015 --moduleResolution Node", path.join(baseDirectory, "package.json"));
 			}
 
-			addKeyValuePairToJson5File(["scripts", "start"], "cross-env TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"ES2015\\\"} ts-node index.ts", path.join(baseDirectory, "package.json"));
+			addKeyValuePairToJson5File(["scripts", "start"], "ts-node index.ts", path.join(baseDirectory, "package.json"));
 
 			if (vscode === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
