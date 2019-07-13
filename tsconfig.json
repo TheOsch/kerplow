@@ -5,6 +5,7 @@
 		"alwaysStrict": true,
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
+		"moduleResolution": "Node",
 		"target": "ES2015"
 	}
 }
