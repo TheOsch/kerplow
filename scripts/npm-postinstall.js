@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
-"use strict";
-
 if (__dirname.indexOf("_npx") !== -1) {
 	process.exit(0);
 }
 
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires */
 const { execSync } = require("child_process");
 const fs = require("fs");
 const JSON5 = require("json5");
@@ -278,6 +275,7 @@ function sleep(ms) {
 			addKeyValuePairToJson5File(["scripts", "start"], "nodemon server.js", path.join(baseDirectory, "package.json"));
 		}
 	} else {
+		// eslint-disable-next-line no-lonely-if
 		if (typescript === true) {
 			console.log("> Rollup");
 			console.log("> ======");

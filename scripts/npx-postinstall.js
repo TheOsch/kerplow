@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
-"use strict";
-
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires */
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv.slice(2), {
 	"alias": {
@@ -80,7 +77,7 @@ if (argv["update"] === true) {
 		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises, complexity
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
@@ -284,6 +281,7 @@ if (argv["update"] === true) {
 				addKeyValuePairToJson5File(["scripts", "start"], "nodemon server.js", path.join(baseDirectory, "package.json"));
 			}
 		} else {
+			// eslint-disable-next-line no-lonely-if
 			if (typescript === true) {
 				console.log("> Rollup");
 				console.log("> ======");

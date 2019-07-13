@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "ES2015",
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
+		"alwaysStrict": true,
 		"esModuleInterop": true,
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"target": "ES2015"
 	}
 }
