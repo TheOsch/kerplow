@@ -30,17 +30,21 @@
 		"wrap-iife": ["error", "inside"], // Parentheses after IIFEs
 
 		// Disabled
+		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/no-magic-numbers": "off",
 		"@typescript-eslint/restrict-plus-operands": "off",
 		"capitalized-comments": "off",
 		"dot-notation": "off",
 		"func-names": "off",
+		"id-length": "off",
+		"max-classes-per-file": "off",
 		"max-len": "off",
 		"max-lines": "off",
 		"max-statements": "off",
 		"multiline-comment-style": "off",
 		"no-console": "off",
 		"no-inner-declarations": "off",
+		"no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
 		"no-process-exit": "off",
 		"no-sync": "off",
 		"no-undefined": "off",
