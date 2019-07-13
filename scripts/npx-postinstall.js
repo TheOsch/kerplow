@@ -53,6 +53,12 @@ if (argv["update"] === true) {
 			}
 		}
 
+		if (fs.existsSync(path.join(baseDirectory, "tsconfig.json"))) {
+			if (argv["yes"] === true || (await confirm("Overwrite `tsconfig.json`? [Y/n] ")) === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "tsconfig.json"), path.join(baseDirectory, "tsconfig.json"));
+			}
+		}
+
 		if (fs.existsSync(path.join(baseDirectory, ".vscode", "extensions.json"))) {
 			if (argv["yes"] === true || (await confirm("Overwrite `extensions.json`? [Y/n] ")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
