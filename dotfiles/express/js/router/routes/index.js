@@ -1,7 +1,5 @@
-"use strict";
-
-let { config } = require("../../config");
-let { app } = require("../../server");
+const { config } = require("../../config");
+const { app } = require("../../server");
 
 function index() {
 	app.get("/", function(request, response) {

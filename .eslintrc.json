@@ -2,7 +2,7 @@
 	"env": {
 		"es6": true,
 		"node": true
-    },
+	},
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"project": "./tsconfig.json"
@@ -31,6 +31,8 @@
 
 		// Disabled
 		"@typescript-eslint/no-magic-numbers": "off",
+		"@typescript-eslint/restrict-plus-operands": "off",
+		"capitalized-comments": "off",
 		"dot-notation": "off",
 		"func-names": "off",
 		"max-len": "off",
@@ -48,6 +50,7 @@
 		"prefer-named-capture-group": "off",
 		"prefer-template": "off",
 		"require-unicode-regexp": "off",
+		"spaced-comment": "off",
 		"wrap-regex": "off"
 	}
 }

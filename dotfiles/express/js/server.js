@@ -1,11 +1,10 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires */
+const express = require("express");
+const logger = require("morgan");
+const path = require("path");
 
-let express = require("express");
-let logger = require("morgan");
-let path = require("path");
-
-let { config } = require("./config");
-let { router } = require("./router");
+const { config } = require("./config");
+const { router } = require("./router");
 
 //let requestDebug = require("request-debug");
 //let requestJs = require("request");
@@ -14,7 +13,7 @@ let { router } = require("./router");
 // 	requestDebug(requestJs);
 //}
 
-let app = express();
+const app = express();
 
 app.set("views", path.join(__dirname, "views"));
 

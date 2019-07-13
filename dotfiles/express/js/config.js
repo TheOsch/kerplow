@@ -1,6 +1,7 @@
-let convict = require("convict");
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires */
+const convict = require("convict");
 
-let config = convict({
+const config = convict({
 	"env": {
 		"doc": "The application environment.",
 		"format": ["production", "development", "test"],

@@ -1,8 +1,6 @@
-"use strict";
+const { app } = require("../server");
 
-let { app } = require("../server");
-
-let { index } = require("./routes/index");
+const { index } = require("./routes/index");
 
 function router() {
 	index();
