@@ -64,6 +64,12 @@ if (argv["update"] === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
 			}
 		}
+
+		if (fs.existsSync(path.join(baseDirectory, ".vscode", "settings.json"))) {
+			if (argv["yes"] === true || (await confirm("Overwrite `settings.json`? [Y/n] ")) === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
+			}
+		}
 	})();
 } else {
 	const dependencies = [];
