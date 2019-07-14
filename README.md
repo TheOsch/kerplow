@@ -138,9 +138,9 @@ npm install brianjenkins94/kerplow --production
 
 	Sass? [Y/n]
 
-	> npm install cross-env typescript ts-node convict express helmet morgan nodemon ejs
+	> npm install typescript ts-node convict express helmet morgan nodemon ejs
 	...
-	> npm install --save-dev cross-env typescript ts-node convict express helmet morgan nodemon ejs
+	> npm install --save-dev typescript ts-node convict express helmet morgan nodemon ejs
 	...
 <!-- --></p>
 </details>
