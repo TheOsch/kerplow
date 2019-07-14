@@ -133,9 +133,9 @@ function sleep(ms) {
 	if (vscode === true) {
 		mkdirpSync(path.join(baseDirectory, ".vscode"));
 
-		fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
+		fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
 
-		fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
+		fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
 	}
 
 	console.log("> Express");
@@ -358,7 +358,7 @@ function sleep(ms) {
 
 	try {
 		execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
-	} catch {}
+	} catch { }
 
 	console.log("kerplow will now self-destruct.");
 	await sleep(1500);

@@ -61,13 +61,13 @@ if (argv["update"] === true) {
 
 		if (fs.existsSync(path.join(baseDirectory, ".vscode", "extensions.json"))) {
 			if (argv["yes"] === true || (await confirm("Overwrite `extensions.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
+				fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
 			}
 		}
 
 		if (fs.existsSync(path.join(baseDirectory, ".vscode", "settings.json"))) {
 			if (argv["yes"] === true || (await confirm("Overwrite `settings.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
+				fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
 			}
 		}
 	})();
@@ -151,9 +151,9 @@ if (argv["update"] === true) {
 		if (vscode === true) {
 			mkdirpSync(path.join(baseDirectory, ".vscode"));
 
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
+			fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
 
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
+			fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
 		}
 
 		console.log("> Express");
