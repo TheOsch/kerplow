@@ -307,7 +307,7 @@ function sleep(ms) {
 			}
 
 			console.log("> TypeDoc");
-			console.log("> ======");
+			console.log("> =======");
 			console.log(">");
 			console.log(">     A documentation generator for TypeScript projects.");
 			console.log(">");

@@ -14,10 +14,14 @@ const fs = require("fs");
 const JSON5 = require("json5");
 const mkdirpSync = require("mkdirp").sync;
 const path = require("path");
-const readline = require("readline").createInterface({
-	"input": process.stdin,
-	"output": process.stdout
-});
+let readline;
+
+if (argv["yes"] !== true) {
+	readline = require("readline").createInterface({
+		"input": process.stdin,
+		"output": process.stdout
+	});
+}
 
 const kerplowDirectory = path.join(__dirname, "..");
 const baseDirectory = process.cwd();
@@ -325,7 +329,7 @@ if (argv["update"] === true) {
 				}
 
 				console.log("> TypeDoc");
-				console.log("> ======");
+				console.log("> =======");
 				console.log(">");
 				console.log(">     A documentation generator for TypeScript projects.");
 				console.log(">");
