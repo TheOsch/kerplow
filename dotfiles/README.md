@@ -51,6 +51,6 @@
 
 ### License
 
-`PROJECT_NAME` is licensed under the [MIT License](https://github.com/USERNAME/REPOSITORY_NAME/blob/master/PROJECT_NAME/LICENSE).
+`PROJECT_NAME` is licensed under the [MIT License](https://github.com/USERNAME/REPOSITORY_NAME/blob/master/LICENSE).
 
 All files located in the `node_modules` directory are externally maintained libraries used by this software which have their own licenses; it is recommend that you read them, as their terms may differ from the terms in the MIT License.
