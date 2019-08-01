@@ -1,7 +1,7 @@
-import * as express from "express";
-import * as helmet from "helmet";
-import * as logger from "morgan";
-import * as path from "path";
+import express from "express";
+import helmet from "helmet";
+import logger from "morgan";
+import path from "path";
 
 import { config } from "./config";
 import { router } from "./router";

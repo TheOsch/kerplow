@@ -30,3 +30,5 @@ router();
 app.listen(config.get("port"), function() {
 	console.log("Listening on port " + this.address().port);
 });
+
+module.exports = { app };
