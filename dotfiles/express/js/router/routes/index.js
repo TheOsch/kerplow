@@ -1,7 +1,6 @@
 const { config } = require("../../config");
-const { app } = require("../../server");
 
-function index() {
+function index(app) {
 	app.get("/", function(request, response) {
 		response.render("pages/index");
 	});

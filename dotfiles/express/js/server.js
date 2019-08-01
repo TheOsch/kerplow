@@ -25,10 +25,8 @@ if (config.get("env") !== "production") {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-router();
+router(app);
 
 app.listen(config.get("port"), function() {
 	console.log("Listening on port " + this.address().port);
 });
-
-module.exports = { app };
