@@ -301,7 +301,7 @@ function sleep(ms) {
 				devDependencies.push("rollup-plugin-typescript");
 				devDependencies.push("tslib");
 
-				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "rollup.config.json"), path.join(baseDirectory, "rollup.config.json"));
+				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "rollup.config.js"), path.join(baseDirectory, "rollup.config.js"));
 
 				addKeyValuePairToJson5File(["scripts", "build"], "rollup --config --watch", path.join(baseDirectory, "package.json"));
 			}
