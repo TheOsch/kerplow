@@ -93,7 +93,7 @@ if (argv["update"] === true) {
 		fs.writeFileSync(file, JSON.stringify(parsedFile, undefined, 2));
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises, complexity
+	// eslint-disable-next-line complexity
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 			execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
@@ -127,6 +127,7 @@ if (argv["update"] === true) {
 			dependencies.push("typescript");
 			dependencies.push("ts-node");
 
+			devDependencies.pop();
 			devDependencies.push("@types/node");
 		}
 

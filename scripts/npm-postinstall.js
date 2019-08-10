@@ -71,7 +71,6 @@ function sleep(ms) {
 	});
 }
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async function() {
 	if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
 		execSync("npm init", { "cwd": baseDirectory, "stdio": "inherit" });
@@ -105,6 +104,7 @@ function sleep(ms) {
 		dependencies.push("typescript");
 		dependencies.push("ts-node");
 
+		devDependencies.pop();
 		devDependencies.push("@types/node");
 	}
 
