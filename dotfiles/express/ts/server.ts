@@ -6,8 +6,8 @@ import path from "path";
 import { config } from "./config";
 import { router } from "./router";
 
-//import * as requestDebug from "request-debug";
-//import * as requestJs from "request";
+//import requestDebug from "request-debug";
+//import requestJs from "request";
 
 //if (config.get("env") !== "production") {
 // 	requestDebug(requestJs);
