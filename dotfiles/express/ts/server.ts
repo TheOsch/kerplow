@@ -13,7 +13,7 @@ import { router } from "./router";
 // 	requestDebug(requestJs);
 //}
 
-export let app = express();
+export const app = express();
 
 app.use(helmet());
 

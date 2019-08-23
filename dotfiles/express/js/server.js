@@ -6,8 +6,8 @@ const path = require("path");
 const { config } = require("./config");
 const { router } = require("./router");
 
-//let requestDebug = require("request-debug");
-//let requestJs = require("request");
+//const requestDebug = require("request-debug");
+//const requestJs = require("request");
 
 //if (config.get("env") !== "production") {
 // 	requestDebug(requestJs);
