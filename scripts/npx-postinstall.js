@@ -371,7 +371,7 @@ if (argv["update"] === true) {
 		console.log("> npm install " + dependencies.join(" ") + "\n");
 		execSync("npm install " + dependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });
 
-		console.log("> npm install --save-dev " + dependencies.join(" ") + "\n");
+		console.log("> npm install --save-dev " + devDependencies.join(" ") + "\n");
 		execSync("npm install --save-dev " + devDependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });
 	})();
 }
