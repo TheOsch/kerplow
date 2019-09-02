@@ -22,6 +22,7 @@
 	"rules": {
 		// Configured
 		"@typescript-eslint/indent": ["warn", "tab"], // Indent using tabs
+		"@typescript-eslint/no-misused-promises": ["warn", { "checksVoidReturn": false }], // No promises in conditionals
 		"array-bracket-newline": ["warn", "consistent"], // Per-array consistent formatting
 		"array-element-newline": ["warn", "consistent"], // Per-array consistent formatting
 		"dot-location": ["warn", "property"], // Dot on the next line for chained functions
