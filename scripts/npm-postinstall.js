@@ -266,7 +266,7 @@ function sleep(ms) {
 		console.log();
 
 		if (sass === true) {
-			addKeyValuePairToJson5File(["scripts", "sassc"], "sass --watch public/css/style.scss:public/css/style.min.css --no-cache --sourcemap=none --style=compressed", path.join(baseDirectory, "package.json"));
+			addKeyValuePairToJson5File(["scripts", "sassc"], "sass --watch public/css/style.scss:public/css/style.css --no-source-map", path.join(baseDirectory, "package.json"));
 		}
 
 		if (typescript === true) {
