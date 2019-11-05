@@ -52,8 +52,6 @@ npm install brianjenkins94/kerplow --production
 		<code>$ npx brianjenkins94/kerplow</code>
 	</summary>
 	<p>
-		<!-- <pre> -->
-			<!-- <code> -->
 
 ```
 > TypeScript
@@ -149,8 +147,6 @@ Sass? [Y/n]
 ...
 ```
 
-			<!-- </code> -->
-		<!-- </pre> -->
 <!-- --></p>
 </details>
 
