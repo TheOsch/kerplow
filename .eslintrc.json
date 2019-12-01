@@ -30,7 +30,7 @@
 		"dot-location": ["warn", "property"], // Dot on the next line for chained functions
 		"func-style": ["warn", "declaration"], // Declaration over expression
 		"function-call-argument-newline": ["warn", "never"], // No line breaks between arguments
-		"no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 1, "maxBOF": 0 }], // No multiple consecutive lines
+		"no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 1, "maxBOF": 0 }], // No multiple consecutive blank lines
 		"no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }], // No increment/decrement operator (except for in `for` loops)
 		"no-tabs": ["warn", { "allowIndentationTabs": true }], // No tabs, excluding indentation
 		"object-curly-spacing": ["warn", "always", { "arraysInObjects": false }], // Objects should always be padded with spaces
@@ -43,6 +43,7 @@
 		"@typescript-eslint/no-extra-parens": ["warn"],
 		"@typescript-eslint/no-unused-vars": ["warn"],
 		"no-empty": ["warn"],
+		"no-param-reassign": ["warn"],
 		"no-shadow": ["warn"],
 		"sort-keys": ["warn"],
 
