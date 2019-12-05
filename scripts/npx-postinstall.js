@@ -4,12 +4,13 @@
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv.slice(2), {
 	"alias": {
+		"r": "recursive",
+		"t": "retab",
 		"u": "update",
 		"y": "yes"
 	},
-	"boolean": ["update", "yes"]
+	"boolean": ["recursive", "retab", "update", "yes"]
 });
-
 const fs = require("fs");
 const JSON5 = require("json5");
 const mkdirpSync = require("mkdirp").sync;
@@ -26,52 +27,100 @@ if (argv["yes"] !== true) {
 const kerplowDirectory = path.join(__dirname, "..");
 const baseDirectory = process.cwd();
 
-function confirm(prompt) {
+function confirm(prompt, defaultOption = true) {
 	return new Promise(function(resolve, reject) {
 		readline.question(prompt, async function(answer) {
-			if (/^(y(es)?)?$/i.test(answer)) {
+			if (/^y(es)?$/i.test(answer) || (answer === "" && defaultOption === true)) {
 				resolve(true);
-			} else if (/^n(o)?$/i.test(answer)) {
+			} else if (/^n(o)?$/i.test(answer) || (answer === "" && defaultOption === false)) {
 				resolve(false);
 			} else {
-				resolve(await confirm(prompt));
+				resolve(await confirm(prompt, defaultOption));
 			}
-
-			readline.pause();
 		});
 	});
 }
 
-if (argv["update"] === true) {
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises
+async function update(directory = baseDirectory) {
+	for (const file of [[".eslintrc.json"], ["tsconfig.json"], [".vscode", "extensions.json"], [".vscode", "settings.json"]]) {
+		if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
+			// FIXME: https://stackoverflow.com/q/59230006
+			if (/* argv["yes"] === */ true || (await confirm(directory + "\tOverwrite `" + file[file.length - 1] + "`? [Y/n] ")) === true) {
+				fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
+			}
+		}
+	}
+}
+
+function findRepositories(baseDirectory) {
+	const repositories = [];
+
+	(function recurse(directory = baseDirectory) {
+		for (const file of fs.readdirSync(directory)) {
+			if (fs.statSync(path.join(directory, file)).isDirectory()) {
+				if (file === ".git") {
+					repositories.push(directory);
+				}
+
+				if (file !== "node_modules") {
+					recurse(path.join(directory, file));
+				}
+			}
+		}
+	})();
+
+	return repositories;
+}
+
+function findRepositoryTextFiles(directory = baseDirectory) {
+	const options = {
+		"cwd": directory,
+		"encoding": "utf8"
+	};
+
+	if (process.platform === "win32") {
+		const bash = path.join(process.env.ProgramW6432, "Git", "usr", "bin", "bash.exe");
+		const wsl = path.join(process.env.windir, "System32", "bash.exe");
+
+		if (fs.existsSync(bash)) {
+			options["env"] = {
+				"PATH": path.dirname(bash)
+			};
+			options["shell"] = bash;
+		} else if (fs.existsSync(wsl)) {
+			const { root, dir, base } = path.parse(directory);
+
+			directory = "/mnt/" + root.split(":")[0].toLowerCase() + "/" + dir.substring(root.length).replace(/\\/g, "/") + "/" + base;
+
+			options["shell"] = wsl;
+		} else {
+			throw new Error("No suitable shell found. Aborting.");
+		}
+	}
+
+	return execSync("git ls-files", options).split("\n");
+}
+
+if (argv["recursive"] === true && argv["update"] === true) {
+	const repositories = findRepositories(baseDirectory);
+
+	for (const repository of repositories) {
+		update(repository);
+	}
+
+	if (argv["retab"] === true) {
+		for (const repository of repositories) {
+			const files = findRepositoryTextFiles(repository);
+
+			console.log(files);
+			console.log();
+		}
+	}
+} else if (argv["update"] === true) {
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
-			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ")) === false) {
-				return;
-			}
-		}
-
-		if (fs.existsSync(path.join(baseDirectory, ".eslintrc.json"))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `.eslintrc.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
-			}
-		}
-
-		if (fs.existsSync(path.join(baseDirectory, "tsconfig.json"))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `tsconfig.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, "tsconfig.json"), path.join(baseDirectory, "tsconfig.json"));
-			}
-		}
-
-		if (fs.existsSync(path.join(baseDirectory, ".vscode", "extensions.json"))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `extensions.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "extensions.json"), path.join(baseDirectory, ".vscode", "extensions.json"));
-			}
-		}
-
-		if (fs.existsSync(path.join(baseDirectory, ".vscode", "settings.json"))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `settings.json`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, ".vscode", "settings.json"), path.join(baseDirectory, ".vscode", "settings.json"));
+			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ", false))) {
+				update();
 			}
 		}
 	})();
@@ -365,8 +414,6 @@ if (argv["update"] === true) {
 				}
 			}
 		}
-
-		readline.close();
 
 		console.log("> npm install " + dependencies.join(" ") + "\n");
 		execSync("npm install " + dependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });

@@ -36,7 +36,7 @@
 #### "Installation"
 
 ```
-npx brianjenkins94/kerplow [--update|-u] [--yes|-y]
+npx brianjenkins94/kerplow [--update|-u] [--yes|-y] [--recursive|-r] [--retab|-t]
 ```
 
 _or_
