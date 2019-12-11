@@ -130,7 +130,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 					const indentWidths = {};
 
-					for (const match of matches) {
+					for (const match of matches.entries()) {
 						if (match.length > 1) {
 							if (indentWidths[match.length] === undefined) {
 								indentWidths[match.length] = 1;
