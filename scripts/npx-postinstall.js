@@ -123,7 +123,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 			const files = findRepositoryTextFiles(repository);
 
 			for (const file of files) {
-				fs.readFile(path.join(baseDirectory, file), function(error, data) {
+				fs.readFile(path.join(repository, file), function(error, data) {
 					console.log(data);
 					process.exit(1);
 
@@ -131,7 +131,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 					// }
 
-					// fs.writeFile(path.join(baseDirectory, file), data);
+					// fs.writeFile(path.join(repository, file), data);
 				});
 			}
 		}
