@@ -8,9 +8,14 @@ const argv = require("minimist")(process.argv.slice(2), {
 		"r": "recursive",
 		"t": "retab",
 		"u": "update",
+		"x": "exclude",
 		"y": "yes"
 	},
-	"boolean": ["recursive", "retab", "update", "yes"]
+	"boolean": ["recursive", "retab", "update", "yes"],
+	"string": ["exclude"],
+	"defaults": {
+		"exclude": ["package.json", "package-lock.json", "yarn-lock.json"]
+	}
 });
 const fs = require("fs");
 const JSON5 = require("json5");
@@ -111,6 +116,38 @@ function findRepositoryTextFiles(cwd = baseDirectory) {
 	return textFiles;
 }
 
+function retab(file) {
+	fs.readFile(file, "utf8", function(error, data) {
+		data = data.replace(/^\t+/gm, " ".repeat(4)).replace(/[ \t]+$/gm, "");
+
+		const matches = data.match(/^ +/gm) || "";
+
+		const indentWidths = {};
+
+		for (const match of matches) {
+			if (match.length > 1) {
+				if (indentWidths[match.length] === undefined) {
+					indentWidths[match.length] = 1;
+				} else {
+					indentWidths[match.length] += 1;
+				}
+			}
+		}
+
+		if (matches["2"] !== undefined) {
+			data.replace(/^( {2})+/gm, "\t");
+		} else {
+			data.replace(/^( {4})+/gm, "\t");
+		}
+
+		if (data[data.length - 1] !== "\n") {
+			data += "\n";
+		}
+
+		//fs.writeFile(path.join(repository, file), data.join("\n"), function(error) { });
+	});
+}
+
 if (argv["recursive"] === true && argv["update"] === true) {
 	const repositories = findRepositories(baseDirectory);
 
@@ -120,40 +157,12 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 	if (argv["retab"] === true) {
 		for (const repository of repositories) {
-			const files = findRepositoryTextFiles(repository);
+			const files = findRepositoryTextFiles(repository).filter(function(file) {
+				return argv["exclude"].split(" ").indexOf(file) !== -1;
+			});
 
 			for (const file of files) {
-				fs.readFile(path.join(repository, file), "utf8", function(error, data) {
-					data = data.replace(/^\t+/gm, "    ").replace(/[ \t]+$/gm, "");
-
-					const matches = data.match(/^ +/gm) || "";
-
-					const indentWidths = {};
-
-					for (const match of matches) {
-						if (match.length > 1) {
-							if (indentWidths[match.length] === undefined) {
-								indentWidths[match.length] = 1;
-							} else {
-								indentWidths[match.length] += 1;
-							}
-						}
-					}
-
-					console.log();
-					console.log(indentWidths);
-					console.log();
-
-					for (const line of data) {
-
-					}
-
-					if (data[data.length - 1] !== "\n") {
-						data += "\n";
-					}
-
-					//fs.writeFile(path.join(repository, file), data.join("\n"), function(error) { });
-				});
+				retab(path.join(repository, file));
 			}
 		}
 	}
