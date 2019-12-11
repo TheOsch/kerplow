@@ -134,7 +134,7 @@ function retab(file) {
 			}
 		}
 
-		if (matches["2"] !== undefined) {
+		if (indentWidths["2"] !== undefined) {
 			data.replace(/^( {2})+/gm, "\t");
 		} else {
 			data.replace(/^( {4})+/gm, "\t");
