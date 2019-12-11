@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 /* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires */
+const { createInterface } = require("readline");
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv.slice(2), {
 	"alias": {
@@ -18,7 +19,7 @@ const path = require("path");
 let readline;
 
 if (argv["yes"] !== true) {
-	readline = require("readline").createInterface({
+	readline = createInterface({
 		"input": process.stdin,
 		"output": process.stdout
 	});
@@ -121,8 +122,18 @@ if (argv["recursive"] === true && argv["update"] === true) {
 		for (const repository of repositories) {
 			const files = findRepositoryTextFiles(repository);
 
-			console.log(files);
-			console.log();
+			for (const file of files) {
+				fs.readFile(path.join(baseDirectory, file), function(error, data) {
+					console.log(data);
+					process.exit(1);
+
+					// for (const line of data) {
+
+					// }
+
+					// fs.writeFile(path.join(baseDirectory, file), data);
+				});
+			}
 		}
 	}
 } else if (argv["update"] === true) {
