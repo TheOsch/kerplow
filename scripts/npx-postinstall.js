@@ -13,7 +13,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 	},
 	"boolean": ["recursive", "retab", "update", "yes"],
 	"string": ["exclude"],
-	"defaults": {
+	"default": {
 		"exclude": ["package.json", "package-lock.json", "yarn-lock.json"]
 	}
 });
