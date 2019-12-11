@@ -72,9 +72,9 @@ function findRepositories(baseDirectory) {
 	return repositories;
 }
 
-function findRepositoryTextFiles(directory = baseDirectory) {
+function findRepositoryTextFiles(cwd = baseDirectory) {
 	const options = {
-		"cwd": directory,
+		"cwd": cwd,
 		"encoding": "utf8"
 	};
 
@@ -88,9 +88,9 @@ function findRepositoryTextFiles(directory = baseDirectory) {
 			};
 			options["shell"] = bash;
 		} else if (fs.existsSync(wsl)) {
-			const { root, dir, base } = path.parse(directory);
+			const { root, dir, base } = path.parse(cwd);
 
-			directory = "/mnt/" + root.split(":")[0].toLowerCase() + "/" + dir.substring(root.length).replace(/\\/g, "/") + "/" + base;
+			cwd = "/mnt/" + root.split(":")[0].toLowerCase() + "/" + dir.substring(root.length).replace(/\\/g, "/") + "/" + base;
 
 			options["shell"] = wsl;
 		} else {
@@ -98,7 +98,16 @@ function findRepositoryTextFiles(directory = baseDirectory) {
 		}
 	}
 
-	return execSync("git ls-files", options).split("\n");
+	const files = execSync("git ls-files", options).split("\n");
+	const textFiles = [];
+
+	for (const file of files) {
+		if (/text/g.test(execSync("file \"" + cwd + "/" + file + "\"", options))) {
+			textFiles.push(file);
+		}
+	}
+
+	return textFiles;
 }
 
 if (argv["recursive"] === true && argv["update"] === true) {
