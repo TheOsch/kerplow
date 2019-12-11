@@ -124,7 +124,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 			for (const file of files) {
 				fs.readFile(path.join(repository, file), "utf8", function(error, data) {
-					data = data.replace(/^\t+/gm, "    ").replace(/\s+$/gm, "");
+					data = data.replace(/^\t+/gm, "    ").replace(/[ \t]+$/gm, "");
 
 					const matches = data.match(/^ +/gm);
 
