@@ -124,10 +124,28 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 			for (const file of files) {
 				fs.readFile(path.join(repository, file), "utf8", function(error, data) {
-					data = data.split("\n");
+					data = data.replace(/\t+$/gm, "    ").replace(/\s+$/gm, "").split("\n");
+
+					const matches = data.match(/^[ ]+/g);
+
+					const indentWidths = {};
+
+					for (const match of matches) {
+						if (match.length > 1) {
+							if (indentWidths[match.length] === undefined) {
+								indentWidths[match.length] = 1;
+							} else {
+								indentWidths[match.length] += 1;
+							}
+						}
+					}
+
+					console.log();
+					console.log(indentWidths);
+					console.log();
 
 					for (const line of data) {
-						line.replace(/\s+$/g, "");
+
 					}
 
 					if (data[data.length - 1] !== "") {
