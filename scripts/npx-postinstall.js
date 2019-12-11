@@ -124,14 +124,17 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 			for (const file of files) {
 				fs.readFile(path.join(repository, file), "utf8", function(error, data) {
-					console.log(data);
-					process.exit(1);
+					data = data.split("\n");
 
-					// for (const line of data) {
+					for (const line of data) {
+						line.replace(/\s+$/g, "");
+					}
 
-					// }
+					if (data[data.length - 1] !== "") {
+						data.push("");
+					}
 
-					// fs.writeFile(path.join(repository, file), data);
+					fs.writeFile(path.join(repository, file), data.join("\n"));
 				});
 			}
 		}
