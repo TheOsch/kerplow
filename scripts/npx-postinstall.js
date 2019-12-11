@@ -134,7 +134,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 						data.push("");
 					}
 
-					fs.writeFile(path.join(repository, file), data.join("\n"));
+					fs.writeFile(path.join(repository, file), data.join("\n"), function(error) { });
 				});
 			}
 		}
