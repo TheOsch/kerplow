@@ -148,8 +148,8 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 					}
 
-					if (data[data.length - 1] !== "") {
-						data.push("");
+					if (data[data.length - 1] !== "\n") {
+						data += "\n";
 					}
 
 					fs.writeFile(path.join(repository, file), data.join("\n"), function(error) { });
