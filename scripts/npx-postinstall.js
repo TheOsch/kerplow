@@ -126,7 +126,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 				fs.readFile(path.join(repository, file), "utf8", function(error, data) {
 					data = data.replace(/^\t+/gm, "    ").replace(/\s+$/gm, "");
 
-					const matches = data.match(/^[ ]+/g);
+					const matches = data.match(/^ +/gm);
 
 					const indentWidths = {};
 
