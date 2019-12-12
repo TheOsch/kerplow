@@ -118,28 +118,25 @@ function findRepositoryTextFiles(cwd = baseDirectory) {
 
 function retab(file) {
 	fs.readFile(file, "utf8", function(error, data) {
-		data = data.replace(/^\t+/gm, " ".repeat(4)).replace(/[ \t]+$/gm, "");
+		// Convert leading, trim trailing
+		data = data.replace(/^\t+/gm, " ".repeat(4)).replace(/[ \t]+$/gm, "").split("\n");
 
-		const matches = data.match(/^ +/gm) || "";
+		let indentationWidth = data.match(/^\s*/m).length;
+		let indentationLevel = 0;
 
-		const indentWidths = {};
+		for (const line of data) {
+			const [indentation, token] = data.match(/^\s*\S+/).split(/\S/);
 
-		for (const match of matches) {
-			if (match.length > 1) {
-				if (indentWidths[match.length] === undefined) {
-					indentWidths[match.length] = 1;
-				} else {
-					indentWidths[match.length] += 1;
-				}
+			if (indentation.length === ((indentationLevel + 1) * indentationWidth)) {
+				indentationLevel += 1;
+			} else if (indentation.length === ((indentationLevel - 1) * indentationWidth)) {
+				indentationLevel -= 1;
+			} else {
+				console.warn("Unexpected indentation jump!");
 			}
 		}
 
-		if (indentWidths["2"] !== undefined) {
-			data.replace(/^( {2})+/gm, "\t");
-		} else {
-			data.replace(/^( {4})+/gm, "\t");
-		}
-
+		// Ensure newline at EOF
 		if (data[data.length - 1] !== "\n") {
 			data += "\n";
 		}
@@ -158,7 +155,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 	if (argv["retab"] === true) {
 		for (const repository of repositories) {
 			const files = findRepositoryTextFiles(repository).filter(function(file) {
-				return argv["exclude"].indexOf(file) !== -1;
+				return argv["exclude"].indexOf(file) === -1;
 			});
 
 			for (const file of files) {
