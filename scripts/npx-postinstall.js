@@ -52,7 +52,9 @@ async function update(directory = baseDirectory) {
 		if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
 			// FIXME: https://stackoverflow.com/q/59230006
 			if (/* argv["yes"] === */ true || (await confirm(directory + "\tOverwrite `" + file[file.length - 1] + "`? [Y/n] ")) === true) {
-				fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
+				if (kerplowDirectory !== directory) {
+					fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
+				}
 			}
 		}
 	}
