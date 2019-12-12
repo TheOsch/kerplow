@@ -94,7 +94,7 @@ function findRepositoryTextFiles(cwd = baseDirectory) {
 
 		if (fs.existsSync(bash)) {
 			options["env"] = {
-				"PATH": path.dirname(bash)
+				"PATH": "/mingw64/bin:/usr/local/bin:/usr/bin:/bin"
 			};
 			options["shell"] = bash;
 		} else if (fs.existsSync(wsl)) {
