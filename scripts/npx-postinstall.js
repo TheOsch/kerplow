@@ -121,7 +121,7 @@ function retab(file) {
 		// Convert leading, trim trailing
 		data = data.replace(/^\t+/gm, " ".repeat(4)).replace(/[ \t]+$/gm, "");
 
-		let indentationWidth = data.match(/^ {2,}/m).length;
+		let indentationWidth = (data.match(/^ {2,}/m) || "").length;
 
 		data = data.split("\n");
 
