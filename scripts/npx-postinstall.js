@@ -48,11 +48,11 @@ function confirm(prompt, defaultOption = true) {
 }
 
 async function update(directory = baseDirectory) {
-	for (const file of [[".eslintrc.json"], ["tsconfig.json"], [".vscode", "extensions.json"], [".vscode", "settings.json"]]) {
-		if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
-			// FIXME: https://stackoverflow.com/q/59230006
-			if (/* argv["yes"] === */ true || (await confirm(directory + "\tOverwrite `" + file[file.length - 1] + "`? [Y/n] ")) === true) {
-				if (kerplowDirectory !== directory) {
+	if (kerplowDirectory !== directory) {
+		for (const file of [[".eslintrc.json"], ["tsconfig.json"], [".vscode", "extensions.json"], [".vscode", "settings.json"]]) {
+			if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
+				// FIXME: https://stackoverflow.com/q/59230006
+				if (/* argv["yes"] === */ true || (await confirm(directory + "\tOverwrite `" + file[file.length - 1] + "`? [Y/n] ")) === true) {
 					fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
 				}
 			}
