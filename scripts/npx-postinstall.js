@@ -128,7 +128,7 @@ function retab(file) {
 		let indentationLevel = 0;
 
 		for (const line of data) {
-			const [indentation, token] = data.match(/^\s*\S+/).split(/\S/);
+			const [indentation, token] = line.match(/^\s*\S+/).split(/\S/);
 
 			if (indentation.length === ((indentationLevel + 1) * indentationWidth)) {
 				indentationLevel += 1;
