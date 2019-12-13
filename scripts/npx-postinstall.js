@@ -54,8 +54,7 @@ async function update(directory = baseDirectory) {
 
 	for (const file of [[".eslintrc.json"], ["tsconfig.json"], [".vscode", "extensions.json"], [".vscode", "settings.json"]]) {
 		if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
-			// FIXME: https://stackoverflow.com/q/59230006
-			if (/* argv["yes"] === */ true || (await confirm(directory + "\tOverwrite `" + file[file.length - 1] + "`? [Y/n] ")) === true) {
+			if (argv["yes"] === true || (await confirm("Overwrite `" + directory + "/" + file[file.length - 1] + "`? [Y/n] ")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
 			}
 		}
@@ -153,23 +152,25 @@ function retab(file) {
 }
 
 if (argv["recursive"] === true && argv["update"] === true) {
-	const repositories = findRepositories(baseDirectory);
+	(async function() {
+		const repositories = findRepositories(baseDirectory);
 
-	for (const repository of repositories) {
-		update(repository);
-	}
-
-	if (argv["retab"] === true) {
 		for (const repository of repositories) {
-			const files = findRepositoryTextFiles(repository).filter(function(file) {
-				return argv["exclude"].indexOf(file) === -1;
-			});
+			await update(repository);
+		}
 
-			for (const file of files) {
-				retab(path.join(repository, file));
+		if (argv["retab"] === true) {
+			for (const repository of repositories) {
+				const files = findRepositoryTextFiles(repository).filter(function(file) {
+					return argv["exclude"].indexOf(file) === -1;
+				});
+
+				for (const file of files) {
+					retab(path.join(repository, file));
+				}
 			}
 		}
-	}
+	})();
 } else if (argv["update"] === true) {
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
