@@ -121,33 +121,64 @@ function findRepositoryTextFiles(cwd = baseDirectory) {
 
 function retab(file) {
 	fs.readFile(file, "utf8", function(error, data) {
+		// Strip BOM
+		if (data.charCodeAt(0) === 65279) {
+			data = data.substring(1);
+		}
+
 		// Convert leading, trim trailing
-		data = data.replace(/^\t+/gm, " ".repeat(4)).replace(/[ \t]+$/gm, "");
+		data = data.replace(/^\t+/gm, function(match) {
+			return " ".repeat(match.length * 4);
+		}).replace(/[ \t]+$/gm, "");
 
-		let indentationWidth = (data.match(/^ {2,}/m) || "").length;
+		let indentationWidth = (data.match(/^ {2,}/m) || [""])[0].length;
 
+		// Trying to avoid having to do this, if possible
 		data = data.split("\n");
 
 		let indentationLevel = 0;
+		let errors = "";
 
-		for (const line of data) {
-			const indentation = line.match(/^\s*\S+/).split(/\S/).pop();
+		for (let x = 0; x < data.length; x++) {
+			const [indentation, firstToken] = (data[x].match(/^\s{2,}?\S+/) || [""])[0].split(/(\S+)/, 2);
+			const lastToken = data[x].split(/(\S+)$/, 2).pop();
 
-			if (indentation.length === ((indentationLevel + 1) * indentationWidth)) {
-				indentationLevel += 1;
-			} else if (indentation.length === ((indentationLevel - 1) * indentationWidth)) {
-				indentationLevel -= 1;
-			} else {
-				console.warn("Unexpected indentation jump!");
+			if (data[x] !== "") {
+				if (indentation.length === ((indentationLevel + 1) * indentationWidth)) {
+					indentationLevel += 1;
+				} else if (indentation.length === ((indentationLevel - 1) * indentationWidth)) {
+					indentationLevel -= 1;
+				} else if (indentation.length === ((indentationLevel - 2) * indentationWidth)
+					|| indentation.length === ((indentationLevel + 2) * indentationWidth)) {
+					// Big jump, but not unreasonable
+					if (indentation.length % indentationWidth === 0) {
+						indentationLevel = indentation.length / indentationWidth;
+					}
+				} else if (indentation.length !== ((indentationLevel) * indentationWidth)
+					&& indentation.length % indentationWidth === 0) {
+					if (errors === "") {
+						errors += file + "\n";
+					}
+
+					errors += "    at " + file + ":" + (x + 1) + " - Unexpected indentation jump\n";
+
+					indentationLevel = indentation.length / indentationWidth;
+				}
 			}
 		}
 
-		// Ensure newline at EOF
-		if (data[data.length - 1] !== "\n") {
-			data += "\n";
+		if (errors !== "") {
+			console.error(errors);
 		}
 
-		//fs.writeFile(path.join(repository, file), data.join("\n"), function(error) { });
+		data = data.join("\n");
+
+		// Ensure newline at EOF
+		if (data[data.length - 1] !== "\n") {
+			data.push("\n");
+		}
+
+		//fs.writeFile(path.join(repository, file), data, function(error) { });
 	});
 }
 
