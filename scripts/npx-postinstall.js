@@ -168,12 +168,7 @@ function retab(file) {
 			console.error(errors);
 		}
 
-		// Ensure newline at EOF
-		if (data[data.length - 1] !== "\n") {
-			data.push("\n");
-		}
-
-		fs.writeFile(file, data.join("\n"), function(error) { });
+		fs.writeFile(file, data.join(process.platform === "win32" ? "\r\n" : "\n"), function(error) { });
 	});
 }
 
