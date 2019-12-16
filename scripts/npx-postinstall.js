@@ -168,9 +168,11 @@ function retab(file) {
 			console.error(errors);
 		}
 
-		data = data.replace(new RegExp(" {" + indentationWidth + "}+", "gm"), function(match) {
-			return " ".repeat(match.length * indentationWidth);
-		}).join("\n");
+		if (indentationWidth >= 1) {
+			data = data.replace(new RegExp(" {" + indentationWidth + "}", "gm"), function(match) {
+				return " ".repeat(match.length * indentationWidth);
+			}).join("\n");
+		}
 
 		fs.writeFile(file, data, function(error) { });
 	});
