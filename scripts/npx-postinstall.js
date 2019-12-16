@@ -14,7 +14,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 	"boolean": ["recursive", "retab", "update", "yes"],
 	"string": ["exclude"],
 	"default": {
-		"exclude": ["package.json", "package-lock.json", "yarn-lock.json"]
+		"exclude": ["package.json", "package-lock.json"]
 	}
 });
 const fs = require("fs");
@@ -35,7 +35,7 @@ const baseDirectory = process.cwd();
 
 function confirm(prompt, defaultOption = true) {
 	return new Promise(function(resolve, reject) {
-		readline.question(prompt, async function(answer) {
+		readline.question(prompt + (defaultOption ? " [Y/n] " : " [y/N] "), async function(answer) {
 			if (/^y(es)?$/i.test(answer) || (answer === "" && defaultOption === true)) {
 				resolve(true);
 			} else if (/^n(o)?$/i.test(answer) || (answer === "" && defaultOption === false)) {
@@ -54,7 +54,7 @@ async function update(directory = baseDirectory) {
 
 	for (const file of [[".eslintrc.json"], ["tsconfig.json"], [".vscode", "extensions.json"], [".vscode", "settings.json"]]) {
 		if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `" + directory + "/" + file[file.length - 1] + "`? [Y/n] ")) === true) {
+			if (argv["yes"] === true || (await confirm("Overwrite `" + directory + "/" + file[file.length - 1] + "`?")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
 			}
 		}
@@ -133,27 +133,24 @@ function retab(file) {
 
 		let indentationWidth = (data.match(/^ {2,}/m) || [""])[0].length;
 
-		// Trying to avoid having to do this, if possible
 		data = data.split("\n");
 
 		let indentationLevel = 0;
+
 		let errors = "";
 
 		for (let x = 0; x < data.length; x++) {
 			const [indentation, firstToken] = (data[x].match(/^\s{2,}?\S+/) || [""])[0].split(/(\S+)/, 2);
 			const lastToken = data[x].split(/(\S+)$/, 2).pop();
 
-			if (data[x] !== "") {
+			if (data[x] !== "" || indentationLevel === indentation.length / indentationWidth) {
 				if (indentation.length === ((indentationLevel + 1) * indentationWidth)) {
 					indentationLevel += 1;
 				} else if (indentation.length === ((indentationLevel - 1) * indentationWidth)) {
 					indentationLevel -= 1;
-				} else if (indentation.length === ((indentationLevel - 2) * indentationWidth)
-					|| indentation.length === ((indentationLevel + 2) * indentationWidth)) {
+				} else if (indentation.length === ((indentationLevel - 2) * indentationWidth)) {
 					// Big jump, but not unreasonable
-					if (indentation.length % indentationWidth === 0) {
-						indentationLevel = indentation.length / indentationWidth;
-					}
+					indentationLevel = indentation.length / indentationWidth;
 				} else if (indentation.length !== ((indentationLevel) * indentationWidth)
 					&& indentation.length % indentationWidth === 0) {
 					if (errors === "") {
@@ -205,7 +202,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 } else if (argv["update"] === true) {
 	(async function() {
 		if (!fs.existsSync(path.join(baseDirectory, "package.json"))) {
-			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place? [y/N] ", false))) {
+			if (argv["yes"] === true || (await confirm("Are you sure you're in the right place?", false))) {
 				update();
 			}
 		}
@@ -255,7 +252,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 		console.log(">       Hejlsberg.");
 		console.log();
 
-		const typescript = argv["yes"] === true || await confirm("TypeScript? [Y/n] ");
+		const typescript = argv["yes"] === true || await confirm("TypeScript?");
 		console.log();
 
 		if (typescript === true) {
@@ -285,7 +282,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 		console.log(">       say: \"No, not Visual Studio, /Visual Studio Code/.\"");
 		console.log();
 
-		const vscode = argv["yes"] === true || await confirm("VS Code? [Y/n] ");
+		const vscode = argv["yes"] === true || await confirm("VS Code?");
 		console.log();
 
 		if (vscode === true) {
@@ -311,7 +308,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 		console.log(">     - Adds boilerplate");
 		console.log();
 
-		const express = argv["yes"] === true || await confirm("Express? [Y/n] ");
+		const express = argv["yes"] === true || await confirm("Express?");
 		console.log();
 
 		if (express === true) {
@@ -368,7 +365,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 			console.log(">     - None");
 			console.log();
 
-			const ejs = argv["yes"] === true || await confirm("EJS? [Y/n] ");
+			const ejs = argv["yes"] === true || await confirm("EJS?");
 			console.log();
 
 			if (ejs === true) {
@@ -420,7 +417,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 			console.log(">     - Adds a compilation step");
 			console.log();
 
-			const sass = argv["yes"] === true || await confirm("Sass? [Y/n] ");
+			const sass = argv["yes"] === true || await confirm("Sass?");
 			console.log();
 
 			if (sass === true) {
@@ -451,7 +448,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 				console.log(">     - Adds a compilation step");
 				console.log();
 
-				const rollup = argv["yes"] === true || await confirm("Rollup? [Y/n] ");
+				const rollup = argv["yes"] === true || await confirm("Rollup?");
 				console.log();
 
 				if (rollup === true) {
@@ -478,7 +475,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 				console.log(">     - None");
 				console.log();
 
-				const typedoc = argv["yes"] === true || await confirm("TypeDoc? [Y/n] ");
+				const typedoc = argv["yes"] === true || await confirm("TypeDoc?");
 				console.log();
 
 				if (typedoc === true) {

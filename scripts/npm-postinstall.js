@@ -23,7 +23,7 @@ const devDependencies = ["eslint", "@typescript-eslint/eslint-plugin", "@typescr
 
 function confirm(prompt) {
 	return new Promise(function(resolve, reject) {
-		readline.question(prompt, async function(answer) {
+		readline.question(prompt + " [Y/n] ", async function(answer) {
 			if (/^(y(es)?)?$/i.test(answer)) {
 				resolve(true);
 			} else if (/^n(o)?$/i.test(answer)) {
@@ -97,7 +97,7 @@ function sleep(ms) {
 	console.log(">       Hejlsberg.");
 	console.log();
 
-	const typescript = await confirm("TypeScript? [Y/n] ");
+	const typescript = await confirm("TypeScript?");
 	console.log();
 
 	if (typescript === true) {
@@ -127,7 +127,7 @@ function sleep(ms) {
 	console.log(">       say: \"No, not Visual Studio, /Visual Studio Code/.\"");
 	console.log();
 
-	const vscode = await confirm("VS Code? [Y/n] ");
+	const vscode = await confirm("VS Code?");
 	console.log();
 
 	if (vscode === true) {
@@ -153,7 +153,7 @@ function sleep(ms) {
 	console.log(">     - Adds boilerplate");
 	console.log();
 
-	const express = await confirm("Express? [Y/n] ");
+	const express = await confirm("Express?");
 	console.log();
 
 	if (express === true) {
@@ -210,7 +210,7 @@ function sleep(ms) {
 		console.log(">     - None");
 		console.log();
 
-		const ejs = await confirm("EJS? [Y/n] ");
+		const ejs = await confirm("EJS?");
 		console.log();
 
 		if (ejs === true) {
@@ -262,7 +262,7 @@ function sleep(ms) {
 		console.log(">     - Adds a compilation step");
 		console.log();
 
-		const sass = await confirm("Sass? [Y/n] ");
+		const sass = await confirm("Sass?");
 		console.log();
 
 		if (sass === true) {
@@ -293,7 +293,7 @@ function sleep(ms) {
 			console.log(">     - Adds a compilation step");
 			console.log();
 
-			const rollup = await confirm("Rollup? [Y/n] ");
+			const rollup = await confirm("Rollup?");
 			console.log();
 
 			if (rollup === true) {
@@ -320,7 +320,7 @@ function sleep(ms) {
 			console.log(">     - None");
 			console.log();
 
-			const typedoc = await confirm("TypeDoc? [Y/n] ");
+			const typedoc = await confirm("TypeDoc?");
 			console.log();
 
 			if (typedoc === true) {
