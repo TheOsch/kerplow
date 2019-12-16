@@ -168,6 +168,11 @@ function retab(file) {
 			console.error(errors);
 		}
 
+		// Ensure newline at EOF
+		if (data[data.length - 1] !== "\n") {
+			data.push("\n");
+		}
+
 		if (indentationWidth >= 2) {
 			data = data.join("\n").replace(new RegExp(" {" + indentationWidth + "}", "gm"), function(match) {
 				return "\t".repeat(match.length / indentationWidth);
