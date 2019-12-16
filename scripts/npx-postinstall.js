@@ -169,8 +169,8 @@ function retab(file) {
 		}
 
 		// Ensure newline at EOF
-		if (data[data.length - 1] !== "\n") {
-			data.push("\n");
+		if (data[data.length - 1] !== "") {
+			data.push("");
 		}
 
 		if (indentationWidth >= 2) {
