@@ -5,26 +5,26 @@
 > Project configuration that self-destructs!
 
 <table>
-	<thead>
-		<tr>
-			<th align="center"><strong>Contents</strong></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				<ol>
-					<li><a href="#getting-started">Getting Started</a></li>
-					<ol>
-						<li><a href="#prerequisites">Prerequisites</a></li>
-						<li><a href="#installation">Installation</a></li>
-						<li><a href="#example">Example</a></li>
-					</ol>
-					<li><a href="#license">License</a></li>
-				</ol>
-			</td>
-		</tr>
-	</tbody>
+    <thead>
+        <tr>
+            <th align="center"><strong>Contents</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <ol>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                    <ol>
+                        <li><a href="#prerequisites">Prerequisites</a></li>
+                        <li><a href="#installation">Installation</a></li>
+                        <li><a href="#example">Example</a></li>
+                    </ol>
+                    <li><a href="#license">License</a></li>
+                </ol>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
 ### Getting Started
@@ -48,10 +48,10 @@ npm install brianjenkins94/kerplow --production
 #### Example
 
 <details>
-	<summary>
-		<code>$ npx brianjenkins94/kerplow</code>
-	</summary>
-	<p>
+    <summary>
+        <code>$ npx brianjenkins94/kerplow</code>
+    </summary>
+    <p>
 
 ```
 > TypeScript
