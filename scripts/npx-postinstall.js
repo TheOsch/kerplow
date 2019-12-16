@@ -131,9 +131,7 @@ function retab(file) {
 		// Convert leading, trim trailing
 		data = data.replace(/^\t+/gm, function(match) {
 			return " ".repeat(match.length * indentationWidth);
-		}).replace(/[ \t]+$/gm, "");
-
-		data = data.split("\n");
+		}).replace(/[ \t]+$/gm, "").split("\n");
 
 		let indentationLevel = 0;
 
@@ -168,10 +166,10 @@ function retab(file) {
 			console.error(errors);
 		}
 
-		if (indentationWidth >= 1) {
-			data = data.replace(new RegExp(" {" + indentationWidth + "}", "gm"), function(match) {
+		if (indentationWidth >= 2) {
+			data = data.join("\n").replace(new RegExp(" {" + indentationWidth + "}", "gm"), function(match) {
 				return " ".repeat(match.length * indentationWidth);
-			}).join("\n");
+			});
 		}
 
 		fs.writeFile(file, data, function(error) { });
