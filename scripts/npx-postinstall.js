@@ -168,14 +168,12 @@ function retab(file) {
 			console.error(errors);
 		}
 
-		data = data.join("\n");
-
 		// Ensure newline at EOF
 		if (data[data.length - 1] !== "\n") {
 			data.push("\n");
 		}
 
-		//fs.writeFile(path.join(repository, file), data, function(error) { });
+		//fs.writeFile(path.join(repository, file), data.join("\n"), function(error) { });
 	});
 }
 
