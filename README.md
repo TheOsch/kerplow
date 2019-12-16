@@ -31,7 +31,7 @@
 
 #### Prerequisites
 
--	[Node.js](https://nodejs.org/en/download/)
+-   [Node.js](https://nodejs.org/en/download/)
 
 #### "Installation"
 
@@ -148,6 +148,7 @@ Sass? [Y/n]
 ```
 
 <!-- --></p>
+
 </details>
 
 ### License

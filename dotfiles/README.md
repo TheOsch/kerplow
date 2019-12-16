@@ -32,7 +32,7 @@
 
 #### Prerequisites
 
-- [Node.js](https://nodejs.org/en/download/)
+-   [Node.js](https://nodejs.org/en/download/)
 
 #### Installation
 
