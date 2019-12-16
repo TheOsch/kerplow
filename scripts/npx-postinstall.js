@@ -126,12 +126,12 @@ function retab(file) {
 			data = data.substring(1);
 		}
 
+		const indentationWidth = (data.match(/^ {2,}/m) || [""])[0].length;
+
 		// Convert leading, trim trailing
 		data = data.replace(/^\t+/gm, function(match) {
-			return " ".repeat(match.length * 4);
+			return " ".repeat(match.length * indentationWidth);
 		}).replace(/[ \t]+$/gm, "");
-
-		let indentationWidth = (data.match(/^ {2,}/m) || [""])[0].length;
 
 		data = data.split("\n");
 
