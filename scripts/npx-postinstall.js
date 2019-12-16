@@ -170,7 +170,7 @@ function retab(file) {
 
 		data = data.join("\n");
 
-		if (indentationWidth >= 2) {
+		if (indentationWidth >= 2 && file.toLowerCase().indexOf(".md") === -1) {
 			data = data.replace(new RegExp("^( {" + indentationWidth + "})+", "gm"), function(match) {
 				return "\t".repeat(match.length / indentationWidth);
 			});
