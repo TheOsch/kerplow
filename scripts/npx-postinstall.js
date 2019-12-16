@@ -121,11 +121,6 @@ function findRepositoryTextFiles(cwd = baseDirectory) {
 
 function retab(file) {
 	fs.readFile(file, "utf8", function(error, data) {
-		// Strip BOM
-		if (data.charCodeAt(0) === 65279) {
-			data = data.substring(1);
-		}
-
 		// Convert leading, trim trailing
 		data = data.replace(/^\t+/gm, function(match) {
 			return " ".repeat(match.length * 4);
