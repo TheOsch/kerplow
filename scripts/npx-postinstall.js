@@ -171,7 +171,7 @@ function retab(file) {
 		data = data.join("\n");
 
 		if (indentationWidth >= 2) {
-			data = data.replace(new RegExp(" {" + indentationWidth + "}", "gm"), function(match) {
+			data = data.replace(new RegExp("^ {" + indentationWidth + "}", "gm"), function(match) {
 				return "\t".repeat(match.length / indentationWidth);
 			});
 		}
