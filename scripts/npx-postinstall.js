@@ -126,12 +126,14 @@ function retab(file) {
 			data = data.substring(1);
 		}
 
-		const indentationWidth = (data.match(/^ {2,}/m) || [""])[0].length;
-
 		// Convert leading, trim trailing
 		data = data.replace(/^\t+/gm, function(match) {
-			return " ".repeat(match.length * indentationWidth);
-		}).replace(/[ \t]+$/gm, "").split("\n");
+			return " ".repeat(match.length * 4);
+		}).replace(/[ \t]+$/gm, "")
+
+		const indentationWidth = (data.match(/^ {2,}/m) || [""])[0].length;
+
+		data = data.split("\n");
 
 		let indentationLevel = 0;
 
@@ -168,7 +170,7 @@ function retab(file) {
 
 		if (indentationWidth >= 2) {
 			data = data.join("\n").replace(new RegExp(" {" + indentationWidth + "}", "gm"), function(match) {
-				return " ".repeat(match.length * indentationWidth);
+				return "\t".repeat(match.length / indentationWidth);
 			});
 		}
 
