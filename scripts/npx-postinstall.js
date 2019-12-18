@@ -5,13 +5,14 @@ const { createInterface } = require("readline");
 const { execSync } = require("child_process");
 const argv = require("minimist")(process.argv.slice(2), {
 	"alias": {
+		"d": "dry-run",
 		"r": "recursive",
 		"t": "retab",
 		"u": "update",
 		"x": "exclude",
 		"y": "yes"
 	},
-	"boolean": ["recursive", "retab", "update", "yes"],
+	"boolean": ["dry-run", "recursive", "retab", "update", "yes"],
 	"string": ["exclude"],
 	"default": {
 		"exclude": ["package.json", "package-lock.json"]
@@ -176,7 +177,9 @@ function retab(file) {
 			});
 		}
 
-		fs.writeFile(file, data, function(error) { });
+		if (argv["dry-run"] !== true) {
+			fs.writeFile(file, data, function(error) { });
+		}
 	});
 }
 
