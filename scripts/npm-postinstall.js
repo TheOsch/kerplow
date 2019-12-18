@@ -343,6 +343,8 @@ function sleep(ms) {
 		}
 	}
 
+	readline.close();
+
 	console.log("> npm install " + dependencies.join(" ") + "\n");
 	execSync("npm install " + dependencies.join(" "), { "cwd": baseDirectory, "stdio": "inherit" });
 
