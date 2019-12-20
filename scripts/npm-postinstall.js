@@ -358,7 +358,7 @@ function sleep(ms) {
 
 	try {
 		execSync("npm remove kerplow", { "cwd": baseDirectory, "stdio": "inherit" });
-	} catch { }
+	} catch (error) { }
 
 	console.log("kerplow will now self-destruct.");
 	await sleep(1500);
