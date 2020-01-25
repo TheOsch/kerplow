@@ -194,7 +194,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 		if (argv["retab"] === true) {
 			for (const repository of repositories) {
 				const files = findRepositoryTextFiles(repository).filter(function(file) {
-					return path.basename(file).indexOf(argv["exclude"]) === -1;
+					return argv["exclude"].indexOf(path.basename(file)) === -1;
 				});
 
 				for (const file of files) {
