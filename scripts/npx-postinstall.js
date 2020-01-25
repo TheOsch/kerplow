@@ -15,7 +15,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 	"boolean": ["dry-run", "recursive", "retab", "update", "yes"],
 	"string": ["exclude"],
 	"default": {
-		"exclude": ["package.json", "package-lock.json"]
+		"exclude": ["package.json", "package-lock.json", ".csproj", ".vcxproj"]
 	}
 });
 const fs = require("fs");
@@ -65,7 +65,7 @@ async function update(directory = baseDirectory) {
 function findRepositories(baseDirectory) {
 	const repositories = [];
 
-	(function recurse(directory = baseDirectory) {
+	(function recurse(directory) {
 		for (const file of fs.readdirSync(directory)) {
 			if (fs.statSync(path.join(directory, file)).isDirectory()) {
 				if (file === ".git") {
@@ -77,7 +77,7 @@ function findRepositories(baseDirectory) {
 				}
 			}
 		}
-	})();
+	})(baseDirectory);
 
 	return repositories;
 }
