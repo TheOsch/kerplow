@@ -15,7 +15,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 	"boolean": ["dry-run", "recursive", "retab", "update", "yes"],
 	"string": ["exclude"],
 	"default": {
-		"exclude": ["package.json", "package-lock.json", ".csproj", ".vcxproj"]
+		"exclude": ["package.json", "package-lock.json"]
 	}
 });
 const fs = require("fs");
@@ -54,8 +54,8 @@ async function update(directory = baseDirectory) {
 	}
 
 	for (const file of [[".eslintrc.json"], ["tsconfig.json"], [".vscode", "extensions.json"], [".vscode", "settings.json"]]) {
-		if (fs.existsSync(path.join(directory, file[file.length - 1]))) {
-			if (argv["yes"] === true || (await confirm("Overwrite `" + directory + "/" + file[file.length - 1] + "`?")) === true) {
+		if (fs.existsSync(path.join(directory, ...file))) {
+			if (argv["yes"] === true || (await confirm("Overwrite `" + path.join(directory, ...file) + "`?")) === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, ...file), path.join(directory, ...file));
 			}
 		}
@@ -194,7 +194,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 		if (argv["retab"] === true) {
 			for (const repository of repositories) {
 				const files = findRepositoryTextFiles(repository).filter(function(file) {
-					return argv["exclude"].indexOf(path.basename(file)) === -1;
+					return path.basename(file).indexOf(argv["exclude"]) === -1;
 				});
 
 				for (const file of files) {
