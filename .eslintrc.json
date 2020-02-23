@@ -49,12 +49,12 @@
 
 		// Disabled
 		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/explicit-module-boundary-types": "off",
 		"@typescript-eslint/no-floating-promises": "off",
 		"@typescript-eslint/no-magic-numbers": "off",
 		"@typescript-eslint/promise-function-async": "off",
 		"@typescript-eslint/require-array-sort-compare": "off",
 		"@typescript-eslint/restrict-plus-operands": "off",
-		"@typescript-eslint/strict-boolean-expressions": "off",
 		"@typescript-eslint/typedef": "off",
 		"capitalized-comments": "off",
 		"class-methods-use-this": "off",
@@ -97,5 +97,13 @@
 		"sort-imports": "off",
 		"spaced-comment": "off",
 		"wrap-regex": "off"
-	}
+	},
+	"overrides": [
+		{
+			"files": ["*.ts", "*.tsx"],
+			"rules": {
+				"@typescript-eslint/explicit-module-boundary-types": ["error"]
+			}
+		}
+	]
 }
