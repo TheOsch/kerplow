@@ -429,7 +429,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 			}
 
 			if (typescript === true) {
-				addKeyValuePairToJson5File(["scripts", "start"], "nodemon --watch **/*.ts --exec ts-node server.ts", path.join(baseDirectory, "package.json"));
+				addKeyValuePairToJson5File(["scripts", "start"], "nodemon --watch \"**/*.ts\" --exec ts-node server.ts", path.join(baseDirectory, "package.json"));
 			} else {
 				addKeyValuePairToJson5File(["scripts", "start"], "nodemon server.js", path.join(baseDirectory, "package.json"));
 			}
