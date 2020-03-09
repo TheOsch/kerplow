@@ -172,14 +172,13 @@ function sleep(ms) {
 
 		mkdirpSync(path.join(baseDirectory, "public"));
 
-		mkdirpSync(path.join(baseDirectory, "router", "routes"));
+		mkdirpSync(path.join(baseDirectory, "routes"));
 
 		if (typescript === true) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "config.ts"), path.join(baseDirectory, "config.ts"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "server.ts"), path.join(baseDirectory, "server.ts"));
 
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "router", "index.ts"), path.join(baseDirectory, "router", "index.ts"));
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "router", "routes", "index.ts"), path.join(baseDirectory, "router", "routes", "index.ts"));
+			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "routes", "index.ts"), path.join(baseDirectory, "routes", "index.ts"));
 
 			if (vscode === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "express", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
@@ -188,8 +187,7 @@ function sleep(ms) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "config.js"), path.join(baseDirectory, "config.js"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "server.js"), path.join(baseDirectory, "server.js"));
 
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "router", "index.js"), path.join(baseDirectory, "router", "index.js"));
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "router", "routes", "index.js"), path.join(baseDirectory, "router", "routes", "index.js"));
+			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "routes", "index.js"), path.join(baseDirectory, "routes", "index.js"));
 
 			if (vscode === true) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "express", "js", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
@@ -232,8 +230,6 @@ function sleep(ms) {
 
 			mkdirpSync(path.join(baseDirectory, "public", "js"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "js", "main.js"), path.join(baseDirectory, "public", "js", "main.js"));
-
-			mkdirpSync(path.join(baseDirectory, "router", "routes"));
 
 			mkdirpSync(path.join(baseDirectory, "views"));
 
