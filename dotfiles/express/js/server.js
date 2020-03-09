@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 		for (const file of fs.readdirSync(directory)) {
 			if (fs.statSync(path.join(directory, file)).isDirectory() === true) {
 				recurse(path.join(directory, file));
-			} else if (path.extname(file).toLowerCase() === ".ts") {
+			} else if (path.extname(file).toLowerCase() === ".js") {
 				files.push(path.join(directory, file));
 			}
 		}
