@@ -225,8 +225,8 @@ function sleep(ms) {
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "css", "lib", "baseline.css"), path.join(baseDirectory, "public", "css", "lib", "baseline.css"));
 
 			mkdirpSync(path.join(baseDirectory, "public", "images"));
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "images", "pic01.jpg"), path.join(baseDirectory, "public", "images", "pic01.jpg"));
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "images", "pic02.jpg"), path.join(baseDirectory, "public", "images", "pic02.jpg"));
+			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "images", "image01.jpg"), path.join(baseDirectory, "public", "images", "image01.jpg"));
+			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "images", "image02.jpg"), path.join(baseDirectory, "public", "images", "image02.jpg"));
 
 			mkdirpSync(path.join(baseDirectory, "public", "js"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "public", "js", "main.js"), path.join(baseDirectory, "public", "js", "main.js"));
