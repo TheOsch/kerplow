@@ -80,10 +80,6 @@ function sleep(ms) {
 	fs.copyFileSync(path.join(kerplowDirectory, ".eslintrc.json"), path.join(baseDirectory, ".eslintrc.json"));
 	fs.copyFileSync(path.join(kerplowDirectory, "tsconfig.json"), path.join(baseDirectory, "tsconfig.json"));
 
-	if (!fs.existsSync(path.join(baseDirectory, ".gitignore"))) {
-		fs.copyFileSync(path.join(kerplowDirectory, ".gitignore"), path.join(baseDirectory, ".gitignore"));
-	}
-
 	console.log("> TypeScript");
 	console.log("> ==========");
 	console.log(">");
