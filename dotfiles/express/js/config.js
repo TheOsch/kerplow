@@ -53,7 +53,7 @@ options.push({
 //		{
 //			"name": "username",
 //			"format": "String",
-//			"default": "support"
+//			"default": "AzureDiamond"
 //		},
 //		{
 //			"name": "password",
