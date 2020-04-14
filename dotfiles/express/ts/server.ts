@@ -20,7 +20,7 @@ if (config.get("env") !== "production") {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-(async function bindRoutes(routesDirectory) {
+(function bindRoutes(routesDirectory) {
 	const files = [];
 
 	(function recurse(directory) {
@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 	})(routesDirectory);
 
 	for (const file of files) {
-		const route = await import(file);
+		const route = require(file);
 
 		for (let verb of Object.keys(route)) {
 			if (verb === "del") {

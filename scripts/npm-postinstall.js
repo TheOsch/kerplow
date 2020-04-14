@@ -172,11 +172,14 @@ function sleep(ms) {
 
 		mkdirpSync(path.join(baseDirectory, "public"));
 
+		mkdirpSync(path.join(baseDirectory, "config"));
+
 		mkdirpSync(path.join(baseDirectory, "routes"));
 
 		if (typescript === true) {
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "config.ts"), path.join(baseDirectory, "config.ts"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "server.ts"), path.join(baseDirectory, "server.ts"));
+
+			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "config", "index.ts"), path.join(baseDirectory, "config", "index.ts"));
 
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "ts", "routes", "index.ts"), path.join(baseDirectory, "routes", "index.ts"));
 
@@ -184,8 +187,9 @@ function sleep(ms) {
 				fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", ".vscode", "express", "ts", "launch.json"), path.join(baseDirectory, ".vscode", "launch.json"));
 			}
 		} else {
-			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "config.js"), path.join(baseDirectory, "config.js"));
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "server.js"), path.join(baseDirectory, "server.js"));
+
+			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "config", "index.js"), path.join(baseDirectory, "config", "index.js"));
 
 			fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "express", "js", "routes", "index.js"), path.join(baseDirectory, "routes", "index.js"));
 
