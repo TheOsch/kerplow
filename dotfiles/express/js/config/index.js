@@ -73,7 +73,9 @@ const flattenedOptions = {
 	})(directory);
 })(__dirname);
 
-export const config = convict(flattenedOptions);
+const config = convict(flattenedOptions);
 
 // Perform validation
 config.validate({ "allowed": "strict" });
+
+module.exports = { config };
