@@ -34,11 +34,15 @@ const flattenedOptions = {
 
 			// For third-party scripts that make direct access to `process.env.*`
 			if (process.env[environmentVariableName] === undefined) {
-				process.env[environmentVariableName] = option["default"];
+				if (typeof option["default"] === "object" && option["default"] !== null) {
+					process.env[environmentVariableName] = JSON.stringify(option["default"]);
+				} else {
+					process.env[environmentVariableName] = option["default"];
+				}
 			}
 
 			flattenedOptions[name] = {
-				"format": option["format"] || "*",
+				"format": option["format"],
 				"default": option["default"],
 				"env": environmentVariableName,
 				"arg": commandLineArgumentName
