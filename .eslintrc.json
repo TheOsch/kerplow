@@ -23,9 +23,7 @@
 		// Configured
 		"@typescript-eslint/indent": ["warn", "tab"], // Indent using tabs
 		"@typescript-eslint/no-misused-promises": ["warn", { "checksVoidReturn": false }], // No promises in conditionals
-		"@typescript-eslint/no-unnecessary-condition": ["warn", { "ignoreRhs": true }], // Allow boolean operators for short-circuiting
 		"@typescript-eslint/space-before-function-paren": ["error", "never"], // No space before function parentheses
-		"@typescript-eslint/strict-boolean-expressions": ["warn", { "ignoreRhs": true }], // Allow boolean operators for short-circuiting
 		"array-bracket-newline": ["warn", "consistent"], // Per-array consistent formatting
 		"array-element-newline": ["warn", "consistent"], // Per-array consistent formatting
 		"dot-location": ["warn", "property"], // Dot on the next line for chained functions
@@ -42,7 +40,9 @@
 
 		// Warn
 		"@typescript-eslint/no-extra-parens": ["warn"],
+		"@typescript-eslint/no-unnecessary-condition": ["warn"],
 		"@typescript-eslint/no-unused-vars": ["warn"],
+		"@typescript-eslint/strict-boolean-expressions": ["warn"],
 		"no-empty": ["warn"],
 		"no-param-reassign": ["warn"],
 		"no-shadow": ["warn"],

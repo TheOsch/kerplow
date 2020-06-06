@@ -457,7 +457,7 @@ if (argv["recursive"] === true && argv["update"] === true) {
 
 				if (rollup === true) {
 					devDependencies.push("rollup");
-					devDependencies.push("rollup-plugin-typescript");
+					devDependencies.push("@rollup/plugin-typescript");
 					devDependencies.push("tslib");
 
 					fs.copyFileSync(path.join(kerplowDirectory, "dotfiles", "rollup.config.js"), path.join(baseDirectory, "rollup.config.js"));
