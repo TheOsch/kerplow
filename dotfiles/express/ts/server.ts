@@ -36,9 +36,13 @@ app.use(express.static(path.join(__dirname, "public")));
 	for (const file of files) {
 		const route = require(file);
 
-		for (let verb of Object.keys(route)) {
-			if (verb === "del") {
+		for (const routeHandler of Object.keys(route)) {
+			let verb;
+
+			if (routeHandler === "del") {
 				verb = "delete";
+			} else {
+				verb = routeHandler;
 			}
 
 			const parsedPath = path.parse(file.substring(routesDirectory.length));
@@ -50,12 +54,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 			pathName = pathName.replace(/\\/g, "/");
 
-			if (route[verb].length === 2) {
+			if (route[routeHandler].length === 2) {
 				console.log("Binding " + verb.toUpperCase() + " " + pathName);
 
-				app[verb](pathName, route[verb]);
+				app[verb](pathName, route[routeHandler]);
 			} else {
-				const { path = pathName, middleware = [], callback } = route[verb](pathName);
+				const { path = pathName, middleware = [], callback } = route[routeHandler](pathName);
 
 				console.log("Binding " + verb.toUpperCase() + " " + path);
 
