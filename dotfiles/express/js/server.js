@@ -23,7 +23,7 @@ if (config.get("env") !== "production") {
 
 	(function recurse(directory) {
 		for (const file of fs.readdirSync(directory)) {
-			if (fs.statSync(path.join(directory, file)).isDirectory() === true) {
+			if (fs.statSync(path.join(directory, file)).isDirectory()) {
 				recurse(path.join(directory, file));
 			} else if (path.extname(file).toLowerCase() === ".js") {
 				files.push(path.join(directory, file));
