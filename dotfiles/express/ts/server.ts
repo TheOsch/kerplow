@@ -18,8 +18,6 @@ if (config.get("env") !== "production") {
 	app.use(logger("dev"));
 }
 
-app.use(express.static(path.join(__dirname, "public")));
-
 (function bindRoutes(routesDirectory) {
 	const files = [];
 
@@ -67,8 +65,24 @@ app.use(express.static(path.join(__dirname, "public")));
 			}
 		}
 	}
+
+	app.get("*", function(request, response, next) {
+		const pathName = path.join(__dirname, "public", request.path);
+
+		if (pathName.startsWith(path.join(__dirname, "public"))) {
+			if (fs.existsSync(pathName)) {
+				if (!fs.statSync(pathName).isDirectory()) {
+					return response.sendFile(pathName);
+				}
+			}
+		}
+
+		response.status(404);
+
+		return next("Cannot GET " + pathName);
+	});
 })(path.join(__dirname, "routes"));
 
 app.listen(config.get("port"), function() {
-	console.log("Listening on port " + this.address().port);
+	console.log("Listening on http://localhost:" + this.address().port + "/");
 });

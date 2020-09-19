@@ -100,7 +100,7 @@ function findRepositoryTextFiles(cwd = baseDirectory) {
 		} else if (fs.existsSync(wsl)) {
 			const { root, dir, base } = path.parse(cwd);
 
-			cwd = "/mnt/" + root.split(":")[0].toLowerCase() + "/" + dir.substring(root.length).replace(/\\/g, "/") + "/" + base;
+			cwd = path.join("/", "mnt", root.split(":")[0].toLowerCase(), dir.substring(root.length), base).replace(/\\/g, "/");
 
 			options["shell"] = wsl;
 		} else {

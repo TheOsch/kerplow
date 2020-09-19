@@ -42,7 +42,7 @@ const flattenedOptions = {
 			}
 
 			flattenedOptions[name] = {
-				"format": option["format"],
+				"format": option["format"] || "String",
 				"default": option["default"],
 				"env": environmentVariableName,
 				"arg": commandLineArgumentName
